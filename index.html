@@ -109,6 +109,86 @@
   }
   .tooltip .lang-name { font-size: 15px; font-weight: 600; color: #fff; }
   .tooltip .lang-detail { font-size: 12px; font-weight: 300; color: rgba(255,255,255,0.45); margin-top: 2px; }
+
+  /* Methodology modal */
+  .info-btn {
+    position: fixed; top: 68px; right: 24px;
+    z-index: 20;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.12);
+    color: rgba(255,255,255,0.45);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 12px; font-weight: 400;
+    padding: 5px 14px; border-radius: 20px;
+    cursor: pointer; letter-spacing: 0.5px;
+    transition: all 0.2s;
+  }
+  .info-btn:hover {
+    background: rgba(255,255,255,0.1);
+    color: rgba(255,255,255,0.7);
+  }
+
+  .modal-overlay {
+    position: fixed; inset: 0;
+    background: rgba(4,4,8,0.85);
+    backdrop-filter: blur(8px);
+    z-index: 300;
+    display: none;
+    align-items: center;
+    justify-content: center;
+  }
+  .modal-overlay.open { display: flex; }
+
+  .modal {
+    background: #111118;
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 10px;
+    max-width: 620px;
+    width: 90vw;
+    max-height: 80vh;
+    overflow-y: auto;
+    padding: 36px 40px 32px;
+    position: relative;
+    font-family: 'Cormorant Garamond', serif;
+    color: rgba(255,255,255,0.75);
+    line-height: 1.7;
+  }
+  .modal h2 {
+    font-size: 18px; font-weight: 600;
+    color: rgba(255,255,255,0.9);
+    letter-spacing: 1px;
+    margin-bottom: 18px;
+  }
+  .modal h3 {
+    font-size: 14px; font-weight: 600;
+    color: rgba(255,255,255,0.75);
+    margin-top: 18px; margin-bottom: 6px;
+    letter-spacing: 0.5px;
+  }
+  .modal p, .modal li {
+    font-size: 14px; font-weight: 300;
+    color: rgba(255,255,255,0.55);
+    margin-bottom: 8px;
+  }
+  .modal ul {
+    padding-left: 20px;
+    margin-bottom: 8px;
+  }
+  .modal li { margin-bottom: 4px; }
+  .modal a {
+    color: rgba(140,170,240,0.8);
+    text-decoration: none;
+  }
+  .modal a:hover { text-decoration: underline; }
+  .modal-close {
+    position: absolute; top: 14px; right: 18px;
+    background: none; border: none;
+    color: rgba(255,255,255,0.35);
+    font-size: 22px; cursor: pointer;
+    font-family: 'Cormorant Garamond', serif;
+    transition: color 0.2s;
+  }
+  .modal-close:hover { color: rgba(255,255,255,0.7); }
 </style>
 </head>
 <body>
@@ -127,6 +207,46 @@
   <button data-view="staten_island">Staten Island</button>
 </div>
 
+<button class="info-btn" id="info-btn">Methodology</button>
+
+<div class="modal-overlay" id="modal-overlay">
+  <div class="modal">
+    <button class="modal-close" id="modal-close">&times;</button>
+    <h2>Methodology and sources</h2>
+
+    <h3>What this shows</h3>
+    <p>Each sentence reads "I live in New York City" written in a language spoken by New Yorkers at home. The font size of each sentence is proportional to the estimated number of speakers of that language in New York City.</p>
+
+    <h3>Sizing</h3>
+    <p>Font size is scaled using a cube-root function of speaker count. A purely linear scale would make any language under ~100,000 speakers invisible next to English (4.9 million) and Spanish (1.8 million). The cube root preserves the rank order and relative magnitude while keeping smaller languages legible. A language with 8x as many speakers will appear 2x larger.</p>
+
+    <h3>Data sources</h3>
+    <ul>
+      <li><strong>Primary:</strong> U.S. Census Bureau, American Community Survey (ACS) 1-year and 5-year estimates (2017-2022), Table B16001 ("Language spoken at home by ability to speak English"). These are the citywide speaker counts for the top ~40 languages.</li>
+      <li><strong>Asian languages:</strong> Asian American Federation analysis of ACS data, which breaks out specific Asian languages (e.g. Malayalam, Tamil, Telugu, Burmese) that the standard ACS tables group into broader categories.</li>
+      <li><strong>Endangered and indigenous languages:</strong> Endangered Language Alliance (ELA) field research and documentation. Speaker counts for languages like Seke, Garifuna, Nahuatl, Totonac, K'iche', and Mixtec are ELA estimates, not census figures, since the census does not track these languages individually.</li>
+    </ul>
+
+    <h3>Borough estimates</h3>
+    <p>The borough toggle is the least precise part of this visualization. The ACS publishes some language data at the county level (each NYC borough is a county), but only for broadly grouped language categories, not for individual languages. The borough-level proportions shown here are estimated by combining:</p>
+    <ul>
+      <li>ACS county-level data for major language groups</li>
+      <li>Known neighborhood concentration patterns (e.g. Yiddish in Borough Park and Williamsburg, Tibetan in Jackson Heights, Garifuna in the South Bronx)</li>
+      <li>Community organization reports and local demographic studies</li>
+    </ul>
+    <p>These borough figures are directionally accurate but should be treated as rough estimates, not precise counts. They are most useful for showing relative concentration patterns across boroughs, not exact numbers.</p>
+
+    <h3>What's missing</h3>
+    <p>This visualization includes 60 languages. New York City is home to an estimated 800+ languages, many of which are spoken by very small communities and are not captured by the census. The Endangered Language Alliance has documented over 700 of them. This graphic represents the ones for which we have reasonably reliable speaker estimates and verified translations.</p>
+
+    <h3>Translations</h3>
+    <p>Translations of "I live in New York City" were sourced from native-speaker references and verified linguistic resources. Some languages (particularly indigenous and endangered ones) have limited written standardization, and transliterations may vary by dialect or community.</p>
+
+    <h3>Interaction</h3>
+    <p>Hover over any sentence to see the language name and speaker count. You can drag any sentence to rearrange the layout. Use the borough buttons to resize all text based on estimated speaker counts in each borough.</p>
+  </div>
+</div>
+
 <div id="stage">
   <div class="cloud-group" id="cloud"></div>
 </div>
@@ -134,7 +254,7 @@
 <div class="footer">
   <p>
     Data: U.S. Census Bureau, American Community Survey; Asian American Federation; Endangered Language Alliance<br>
-    Over 800 languages are spoken across the five boroughs. Font size is directly proportional to number of speakers.
+    Over 800 languages are spoken across the five boroughs. Font size is proportional to number of speakers. <a href="#" id="footer-info" style="color: rgba(140,170,240,0.5); pointer-events: auto;">Methodology</a>
   </p>
 </div>
 
@@ -560,6 +680,28 @@ let resizeTimer;
 window.addEventListener('resize', () => {
   clearTimeout(resizeTimer);
   resizeTimer = setTimeout(() => buildCloud(currentView), 300);
+});
+
+// ==========================================================
+// Methodology modal
+// ==========================================================
+
+const modalOverlay = document.getElementById('modal-overlay');
+document.getElementById('info-btn').addEventListener('click', () => {
+  modalOverlay.classList.add('open');
+});
+document.getElementById('footer-info').addEventListener('click', (e) => {
+  e.preventDefault();
+  modalOverlay.classList.add('open');
+});
+document.getElementById('modal-close').addEventListener('click', () => {
+  modalOverlay.classList.remove('open');
+});
+modalOverlay.addEventListener('click', (e) => {
+  if (e.target === modalOverlay) modalOverlay.classList.remove('open');
+});
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') modalOverlay.classList.remove('open');
 });
 </script>
 
