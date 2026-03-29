@@ -86,21 +86,6 @@
     margin: 0 0.15em;
   }
 
-  /* ---- Calligram view ---- */
-  .calligram-container {
-    display: none;
-    justify-content: center;
-    align-items: center;
-    padding: 0 20px 80px;
-  }
-  .calligram-container.active {
-    display: flex;
-  }
-  .calligram-container canvas {
-    max-width: 100%;
-    height: auto;
-  }
-
   /* ---- Footer ---- */
   .footer {
     text-align: center;
@@ -178,16 +163,10 @@
 </div>
 
 <div class="controls" id="controls">
-  <button class="active" data-view="flow">Flowing text</button>
-  <button data-view="calligram">NYC silhouette</button>
   <button data-view="methodology">Methodology</button>
 </div>
 
 <div class="flow-container" id="flow"></div>
-
-<div class="calligram-container" id="calligram-container">
-  <canvas id="calligram"></canvas>
-</div>
 
 <div class="footer">
   <p>
@@ -218,9 +197,6 @@
       <li><strong>Asian languages:</strong> Asian American Federation analysis of ACS data, which breaks out specific Asian languages (e.g. Malayalam, Tamil, Telugu, Burmese) that the standard ACS tables group into broader categories.</li>
       <li><strong>Endangered and indigenous languages:</strong> Endangered Language Alliance (ELA) field research and documentation. Speaker counts for languages like Seke, Garifuna, Nahuatl, Totonac, K'iche', and Mixtec are ELA estimates, not census figures, since the census does not track these languages individually.</li>
     </ul>
-
-    <h3>NYC silhouette view</h3>
-    <p>The silhouette view renders the same text into a simplified outline of the five boroughs of New York City. The shape is an approximation for visual effect, not a cartographically precise boundary.</p>
 
     <h3>What's missing</h3>
     <p>This visualization includes 60 languages. New York City is home to an estimated 800+ languages, many of which are spoken by very small communities and are not captured by the census. The Endangered Language Alliance has documented over 700 of them. This graphic represents the ones for which we have reasonably reliable speaker estimates and verified translations.</p>
@@ -374,177 +350,16 @@ function buildFlow() {
 }
 
 // ==========================================================
-// View B: NYC silhouette calligram (canvas)
+// Methodology modal
 // ==========================================================
-
-// Simplified five boroughs outline (approximate, for visual effect)
-// Coordinates in a 0-600 x 0-700 space
-const NYC_PATHS = [
-  // Staten Island (bottom left)
-  [[60,520],[100,490],[130,500],[145,530],[150,570],[140,620],[120,660],[80,670],[50,640],[40,590],[50,550]],
-  // Brooklyn (center bottom)
-  [[230,430],[280,400],[340,390],[390,400],[420,430],[430,470],[420,520],[400,560],[360,580],[310,590],[260,570],[240,530],[230,470]],
-  // Queens (right)
-  [[350,200],[400,180],[450,175],[500,190],[540,220],[560,270],[555,340],[540,390],[510,420],[460,430],[420,430],[390,400],[370,350],[355,290],[350,240]],
-  // Manhattan (thin center)
-  [[215,80],[230,60],[245,55],[260,70],[265,120],[268,180],[270,240],[272,300],[270,360],[265,400],[255,420],[240,430],[230,420],[222,380],[218,320],[215,260],[213,200],[213,140]],
-  // Bronx (top right)
-  [[280,30],[320,15],[370,10],[420,20],[460,50],[480,90],[485,140],[475,185],[455,210],[420,220],[380,215],[340,200],[310,175],[290,140],[278,100],[275,60]],
-];
-
-function drawCalligram() {
-  const canvas = document.getElementById('calligram');
-  const ctx = canvas.getContext('2d');
-  const DPR = window.devicePixelRatio || 2;
-
-  // Canvas dimensions
-  const displayW = Math.min(600, window.innerWidth - 40);
-  const displayH = displayW * (700 / 600);
-  canvas.width = displayW * DPR;
-  canvas.height = displayH * DPR;
-  canvas.style.width = displayW + 'px';
-  canvas.style.height = displayH + 'px';
-  ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
-
-  const scaleX = displayW / 600;
-  const scaleY = displayH / 700;
-
-  // Build a mask: for each scanline y, compute the x-ranges inside the shape
-  // First, create an offscreen canvas with the shape filled
-  const maskCanvas = document.createElement('canvas');
-  maskCanvas.width = displayW;
-  maskCanvas.height = displayH;
-  const mctx = maskCanvas.getContext('2d');
-
-  mctx.fillStyle = '#fff';
-  for (const path of NYC_PATHS) {
-    mctx.beginPath();
-    path.forEach((pt, i) => {
-      const x = pt[0] * scaleX;
-      const y = pt[1] * scaleY;
-      if (i === 0) mctx.moveTo(x, y);
-      else mctx.lineTo(x, y);
-    });
-    mctx.closePath();
-    mctx.fill();
-  }
-
-  const maskData = mctx.getImageData(0, 0, displayW, displayH).data;
-
-  function isInside(x, y) {
-    const px = Math.floor(x);
-    const py = Math.floor(y);
-    if (px < 0 || px >= displayW || py < 0 || py >= displayH) return false;
-    return maskData[(py * displayW + px) * 4 + 3] > 128;
-  }
-
-  function getXRange(y) {
-    let minX = -1, maxX = -1;
-    for (let x = 0; x < displayW; x++) {
-      if (isInside(x, y)) {
-        if (minX === -1) minX = x;
-        maxX = x;
-      }
-    }
-    return minX === -1 ? null : { left: minX, right: maxX };
-  }
-
-  // Build a flat text string cycling through languages
-  // Smaller font for calligram to fill the shape densely
-  const calligramFontSize = Math.max(10, displayW * 0.022);
-  ctx.font = `400 ${calligramFontSize}px 'Cormorant Garamond', serif`;
-  ctx.textBaseline = 'top';
-
-  // Build text stream: repeat languages weighted by speaker count
-  const textStream = [];
-  // Add each language text, repeating more-spoken ones more
-  for (const l of languages) {
-    const reps = Math.max(1, Math.round(Math.sqrt(l.speakers) / 200));
-    for (let r = 0; r < reps; r++) {
-      textStream.push(l);
-    }
-  }
-  // Shuffle
-  for (let i = textStream.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [textStream[i], textStream[j]] = [textStream[j], textStream[i]];
-  }
-
-  const lineHeight = calligramFontSize * 1.35;
-  let textIdx = 0;
-
-  for (let y = 2; y < displayH - lineHeight; y += lineHeight) {
-    const range = getXRange(y + lineHeight / 2);
-    if (!range) continue;
-
-    let x = range.left + 3;
-    const maxX = range.right - 3;
-
-    while (x < maxX && textIdx < textStream.length * 3) {
-      const l = textStream[textIdx % textStream.length];
-      textIdx++;
-
-      // Use the language's specific font
-      const fontStr = `400 ${calligramFontSize}px ${l.font}`;
-      ctx.font = fontStr;
-
-      const word = l.text;
-      const m = ctx.measureText(word);
-
-      if (x + m.width > maxX) break;
-
-      // Check if still inside shape at this position
-      if (!isInside(x + m.width / 2, y + lineHeight / 2)) {
-        x += 8;
-        continue;
-      }
-
-      const colorIdx = languages.indexOf(l);
-      ctx.fillStyle = getColor(colorIdx, languages.length);
-      ctx.globalAlpha = 0.85;
-      ctx.fillText(word, x, y);
-
-      x += m.width + calligramFontSize * 0.5;
-    }
-  }
-
-  ctx.globalAlpha = 1;
-}
-
-// ==========================================================
-// View toggling
-// ==========================================================
-
-let currentView = 'flow';
 
 document.getElementById('controls').addEventListener('click', (e) => {
   const btn = e.target.closest('button');
   if (!btn) return;
-  const view = btn.dataset.view;
-
-  if (view === 'methodology') {
+  if (btn.dataset.view === 'methodology') {
     document.getElementById('modal-overlay').classList.add('open');
-    return;
-  }
-
-  if (view === currentView) return;
-  currentView = view;
-  document.querySelectorAll('.controls button').forEach(b => b.classList.remove('active'));
-  btn.classList.add('active');
-
-  if (view === 'flow') {
-    flowEl.style.display = '';
-    document.getElementById('calligram-container').classList.remove('active');
-  } else if (view === 'calligram') {
-    flowEl.style.display = 'none';
-    document.getElementById('calligram-container').classList.add('active');
-    drawCalligram();
   }
 });
-
-// ==========================================================
-// Methodology modal
-// ==========================================================
 
 const modalOverlay = document.getElementById('modal-overlay');
 document.getElementById('modal-close').addEventListener('click', () => {
@@ -563,10 +378,6 @@ document.addEventListener('keydown', (e) => {
 
 document.fonts.ready.then(() => {
   buildFlow();
-});
-
-window.addEventListener('resize', () => {
-  if (currentView === 'calligram') drawCalligram();
 });
 </script>
 
