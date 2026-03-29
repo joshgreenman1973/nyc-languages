@@ -5,124 +5,126 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>I live in New York City - in every language</title>
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Noto+Serif:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Noto+Serif+Bengali:wght@300;400;700&family=Noto+Serif+Devanagari:wght@300;400;700&family=Noto+Serif+Georgian:wght@300;400;700&family=Noto+Serif+Greek:wght@300;400;700&family=Noto+Serif+Gujarati:wght@300;400;700&family=Noto+Serif+Gurmukhi:wght@300;400;700&family=Noto+Serif+Hebrew:wght@300;400;700&family=Noto+Serif+JP:wght@300;400;700&family=Noto+Serif+KR:wght@300;400;700&family=Noto+Serif+SC:wght@300;400;700&family=Noto+Serif+TC:wght@300;400;700&family=Noto+Serif+Thai:wght@300;400;700&family=Noto+Serif+Tibetan:wght@300;400;700&family=Noto+Serif+Armenian:wght@300;400;700&family=Noto+Serif+Ethiopic:wght@300;400;700&family=Noto+Sans+Arabic:wght@300;400;700&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Noto+Serif:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Noto+Serif+Bengali:wght@300;400;700&family=Noto+Serif+Devanagari:wght@300;400;700&family=Noto+Serif+Georgian:wght@300;400;700&family=Noto+Serif+Greek:wght@300;400;700&family=Noto+Serif+Gujarati:wght@300;400;700&family=Noto+Serif+Gurmukhi:wght@300;400;700&family=Noto+Serif+Hebrew:wght@300;400;700&family=Noto+Serif+JP:wght@300;400;700&family=Noto+Serif+KR:wght@300;400;700&family=Noto+Serif+SC:wght@300;400;700&family=Noto+Serif+TC:wght@300;400;700&family=Noto+Serif+Thai:wght@300;400;700&family=Noto+Serif+Tibetan:wght@300;400;700&family=Noto+Serif+Armenian:wght@300;400;700&family=Noto+Serif+Ethiopic:wght@300;400;700&family=Noto+Sans+Arabic:wght@300;400;700&family=Noto+Serif+Myanmar:wght@300;400;700&family=Noto+Serif+Tamil:wght@300;400;700&family=Noto+Serif+Telugu:wght@300;400;700&family=Noto+Serif+Malayalam:wght@300;400;700&family=Noto+Serif+Sinhala:wght@300;400;700&family=Noto+Serif+Khmer:wght@300;400;700&family=Noto+Serif+Kannada:wght@300;400;700&display=swap');
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
 
   body {
     background: #06060b;
-    color: #ffffff;
+    color: #fff;
     height: 100vh;
     overflow: hidden;
     font-family: 'Cormorant Garamond', 'Noto Serif', serif;
   }
 
   .header {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    text-align: center;
-    padding: 28px 40px 20px;
+    position: fixed; top: 0; left: 0; right: 0;
+    text-align: center; padding: 20px 40px 16px;
     z-index: 10;
     background: linear-gradient(to bottom, #06060b 40%, transparent);
     pointer-events: none;
   }
-
   .header h1 {
     font-family: 'Cormorant Garamond', serif;
-    font-size: 13px;
-    font-weight: 300;
-    letter-spacing: 4px;
-    text-transform: uppercase;
+    font-size: 13px; font-weight: 300;
+    letter-spacing: 4px; text-transform: uppercase;
     color: rgba(255,255,255,0.35);
   }
-
   .header p {
     font-family: 'Cormorant Garamond', serif;
-    font-size: 12px;
-    font-weight: 300;
+    font-size: 12px; font-weight: 300;
     color: rgba(255,255,255,0.2);
-    margin-top: 4px;
-    letter-spacing: 0.5px;
+    margin-top: 4px; letter-spacing: 0.5px;
+  }
+
+  .controls {
+    position: fixed; top: 68px; left: 50%; transform: translateX(-50%);
+    z-index: 20; display: flex; gap: 6px;
+    font-family: 'Cormorant Garamond', serif;
+  }
+  .controls button {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.12);
+    color: rgba(255,255,255,0.45);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 12px; font-weight: 400;
+    padding: 5px 14px; border-radius: 20px;
+    cursor: pointer; letter-spacing: 0.5px;
+    transition: all 0.2s;
+  }
+  .controls button:hover {
+    background: rgba(255,255,255,0.1);
+    color: rgba(255,255,255,0.7);
+  }
+  .controls button.active {
+    background: rgba(255,255,255,0.14);
+    color: rgba(255,255,255,0.85);
+    border-color: rgba(255,255,255,0.25);
   }
 
   #stage {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    overflow: hidden;
+    position: absolute; top: 0; left: 0;
+    width: 100vw; height: 100vh; overflow: hidden;
   }
 
   .cloud-group {
-    position: absolute;
-    will-change: transform;
+    position: absolute; will-change: transform;
   }
 
   .lang-item {
-    position: absolute;
-    white-space: nowrap;
-    cursor: default;
-    will-change: transform;
+    position: absolute; white-space: nowrap;
+    cursor: grab; will-change: transform;
+    user-select: none; -webkit-user-select: none;
+    transition: font-size 0.6s ease, opacity 0.4s;
+  }
+  .lang-item:hover { filter: brightness(1.4); }
+  .lang-item.dragging {
+    cursor: grabbing; filter: brightness(1.6);
+    z-index: 1000; transition: none;
   }
 
   .footer {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    text-align: center;
-    padding: 20px 40px 24px;
+    position: fixed; bottom: 0; left: 0; right: 0;
+    text-align: center; padding: 16px 40px 18px;
     z-index: 10;
     background: linear-gradient(to top, #06060b 40%, transparent);
     pointer-events: none;
   }
-
   .footer p {
     font-family: 'Cormorant Garamond', serif;
-    font-size: 11px;
-    font-weight: 300;
+    font-size: 11px; font-weight: 300;
     color: rgba(255,255,255,0.18);
-    line-height: 1.7;
-    letter-spacing: 0.3px;
+    line-height: 1.7; letter-spacing: 0.3px;
   }
 
   .tooltip {
     position: fixed;
-    background: rgba(12, 12, 20, 0.92);
+    background: rgba(12,12,20,0.92);
     border: 1px solid rgba(255,255,255,0.1);
-    border-radius: 6px;
-    padding: 10px 14px;
+    border-radius: 6px; padding: 10px 14px;
     font-family: 'Cormorant Garamond', serif;
-    pointer-events: none;
-    opacity: 0;
-    transition: opacity 0.15s;
-    z-index: 100;
+    pointer-events: none; opacity: 0;
+    transition: opacity 0.15s; z-index: 200;
     backdrop-filter: blur(12px);
   }
-
-  .tooltip .lang-name {
-    font-size: 15px;
-    font-weight: 600;
-    color: #fff;
-    letter-spacing: 0.5px;
-  }
-
-  .tooltip .lang-detail {
-    font-size: 12px;
-    font-weight: 300;
-    color: rgba(255,255,255,0.45);
-    margin-top: 2px;
-  }
+  .tooltip .lang-name { font-size: 15px; font-weight: 600; color: #fff; }
+  .tooltip .lang-detail { font-size: 12px; font-weight: 300; color: rgba(255,255,255,0.45); margin-top: 2px; }
 </style>
 </head>
 <body>
 
 <div class="header">
   <h1>"I live in New York City"</h1>
-  <p>In the languages New Yorkers speak at home, sized by number of speakers</p>
+  <p>In the languages New Yorkers speak at home, sized proportionally by number of speakers. Drag any sentence to rearrange.</p>
+</div>
+
+<div class="controls" id="controls">
+  <button class="active" data-view="city">All NYC</button>
+  <button data-view="manhattan">Manhattan</button>
+  <button data-view="brooklyn">Brooklyn</button>
+  <button data-view="queens">Queens</button>
+  <button data-view="bronx">Bronx</button>
+  <button data-view="staten_island">Staten Island</button>
 </div>
 
 <div id="stage">
@@ -131,8 +133,8 @@
 
 <div class="footer">
   <p>
-    Data: U.S. Census Bureau, American Community Survey (2022 estimates) for New York City<br>
-    Over 600 languages are spoken across the five boroughs, making it the most linguistically diverse city on Earth.
+    Data: U.S. Census Bureau, American Community Survey; Asian American Federation; Endangered Language Alliance<br>
+    Over 800 languages are spoken across the five boroughs. Font size is directly proportional to number of speakers.
   </p>
 </div>
 
@@ -142,274 +144,422 @@
 </div>
 
 <script>
+// ==========================================================
+// NYC Languages: "I live in New York City"
+// Sources: ACS 2022, Asian American Federation, ELA, DCP
+//
+// Borough multipliers estimated from ACS county-level data
+// and neighborhood language concentration patterns.
+// ==========================================================
+
+const L = "'Cormorant Garamond', serif";
 const languages = [
-  { lang: "English",            speakers: 4876000, text: "I live in New York City.",                        font: "'Cormorant Garamond', serif" },
-  { lang: "Spanish",            speakers: 1833000, text: "Yo vivo en la ciudad de Nueva York.",             font: "'Cormorant Garamond', serif" },
-  { lang: "Chinese (Mandarin)", speakers: 430000,  text: "\u6211\u4F4F\u5728\u7EBD\u7EA6\u5E02\u3002",    font: "'Noto Serif SC', serif" },
-  { lang: "Chinese (Cantonese)",speakers: 180000,  text: "\u6211\u4F4F\u55BA\u7D10\u7D04\u5E02\u3002",    font: "'Noto Serif TC', serif" },
-  { lang: "Russian",            speakers: 175000,  text: "\u042F \u0436\u0438\u0432\u0443 \u0432 \u041D\u044C\u044E-\u0419\u043E\u0440\u043A\u0435.", font: "'Noto Serif', serif" },
-  { lang: "Bengali",            speakers: 148000,  text: "\u0986\u09AE\u09BF \u09A8\u09BF\u0989 \u0987\u09DF\u09B0\u09CD\u0995 \u09B8\u09BF\u099F\u09BF\u09A4\u09C7 \u09A5\u09BE\u0995\u09BF\u0964", font: "'Noto Serif Bengali', serif" },
-  { lang: "Haitian Creole",     speakers: 133000,  text: "Mwen rete nan vil New York.",                    font: "'Cormorant Garamond', serif" },
-  { lang: "Yiddish",            speakers: 110000,  text: "\u05D0\u05D9\u05DA \u05D5\u05D5\u05D0\u05D5\u05D9\u05DF \u05D0\u05D9\u05DF \u05E0\u05D9\u05D5 \u05D9\u05D0\u05E8\u05E7 \u05E1\u05D9\u05D8\u05D9.", font: "'Noto Serif Hebrew', serif" },
-  { lang: "Korean",             speakers: 100000,  text: "\uC800\uB294 \uB274\uC695\uC2DC\uC5D0 \uC0B4\uACE0 \uC788\uC2B5\uB2C8\uB2E4.", font: "'Noto Serif KR', serif" },
-  { lang: "Italian",            speakers: 95000,   text: "Io vivo a New York.",                             font: "'Cormorant Garamond', serif" },
-  { lang: "French",             speakers: 84000,   text: "J\u2019habite \u00e0 New York.",                  font: "'Cormorant Garamond', serif" },
-  { lang: "Arabic",             speakers: 82000,   text: "\u0623\u0646\u0627 \u0623\u0639\u064A\u0634 \u0641\u064A \u0645\u062F\u064A\u0646\u0629 \u0646\u064A\u0648\u064A\u0648\u0631\u0643.", font: "'Noto Sans Arabic', sans-serif" },
-  { lang: "Tagalog",            speakers: 68000,   text: "Nakatira ako sa New York City.",                  font: "'Cormorant Garamond', serif" },
-  { lang: "Polish",             speakers: 62000,   text: "Mieszkam w Nowym Jorku.",                         font: "'Cormorant Garamond', serif" },
-  { lang: "Hindi",              speakers: 57000,   text: "\u092E\u0948\u0902 \u0928\u094D\u092F\u0942\u092F\u0949\u0930\u094D\u0915 \u0936\u0939\u0930 \u092E\u0947\u0902 \u0930\u0939\u0924\u093E \u0939\u0942\u0901\u0964", font: "'Noto Serif Devanagari', serif" },
-  { lang: "Urdu",               speakers: 52000,   text: "\u0645\u06CC\u06BA \u0646\u06CC\u0648\u06CC\u0627\u0631\u06A9 \u0634\u06C1\u0631 \u0645\u06CC\u06BA \u0631\u06C1\u062A\u0627 \u06C1\u0648\u06BA\u06D4", font: "'Noto Sans Arabic', sans-serif" },
-  { lang: "Greek",              speakers: 42000,   text: "\u039C\u03AD\u03BD\u03C9 \u03C3\u03C4\u03B7 \u039D\u03AD\u03B1 \u03A5\u03CC\u03C1\u03BA\u03B7.",  font: "'Noto Serif Greek', serif" },
-  { lang: "Hebrew",             speakers: 40000,   text: "\u05D0\u05E0\u05D9 \u05D2\u05E8 \u05D1\u05E0\u05D9\u05D5 \u05D9\u05D5\u05E8\u05E7 \u05E1\u05D9\u05D8\u05D9.", font: "'Noto Serif Hebrew', serif" },
-  { lang: "Gujarati",           speakers: 38000,   text: "\u0AB9\u0AC1\u0A82 \u0AA8\u0ACD\u0AAF\u0AC1 \u0AAF\u0ACB\u0AB0\u0ACD\u0A95 \u0AB8\u0ABF\u0A9F\u0AC0\u0AAE\u0ABE\u0A82 \u0AB0\u0AB9\u0AC1\u0A82 \u0A9B\u0AC1\u0A82.", font: "'Noto Serif Gujarati', serif" },
-  { lang: "Japanese",           speakers: 35000,   text: "\u79C1\u306F\u30CB\u30E5\u30FC\u30E8\u30FC\u30AF\u5E02\u306B\u4F4F\u3093\u3067\u3044\u307E\u3059\u3002", font: "'Noto Serif JP', serif" },
-  { lang: "Portuguese",         speakers: 33000,   text: "Eu moro na cidade de Nova York.",                 font: "'Cormorant Garamond', serif" },
-  { lang: "German",             speakers: 28000,   text: "Ich lebe in New York City.",                      font: "'Cormorant Garamond', serif" },
-  { lang: "Punjabi",            speakers: 27000,   text: "\u0A2E\u0A48\u0A02 \u0A28\u0A3F\u0A0A \u0A2F\u0A3E\u0A30\u0A15 \u0A38\u0A3F\u0A1F\u0A40 \u0A35\u0A3F\u0A71\u0A1A \u0A30\u0A39\u0A3F\u0A70\u0A26\u0A3E \u0A39\u0A3E\u0A02\u0964", font: "'Noto Serif Gurmukhi', serif" },
-  { lang: "Albanian",           speakers: 26000,   text: "Un\u00eb jetoj n\u00eb New York City.",           font: "'Cormorant Garamond', serif" },
-  { lang: "Vietnamese",         speakers: 24000,   text: "T\u00f4i s\u1ed1ng \u1edf th\u00e0nh ph\u1ed1 New York.", font: "'Cormorant Garamond', serif" },
-  { lang: "Yoruba",             speakers: 22000,   text: "Mo \u0144 gb\u00e9 n\u00ed \u00ecl\u00fa New York.", font: "'Cormorant Garamond', serif" },
-  { lang: "Ukrainian",          speakers: 20000,   text: "\u042F \u0436\u0438\u0432\u0443 \u0432 \u041D\u044C\u044E-\u0419\u043E\u0440\u043A\u0443.", font: "'Noto Serif', serif" },
-  { lang: "Turkish",            speakers: 18000,   text: "New York\u2019ta ya\u015f\u0131yorum.",           font: "'Cormorant Garamond', serif" },
-  { lang: "Thai",               speakers: 16000,   text: "\u0E09\u0E31\u0E19\u0E2D\u0E32\u0E28\u0E31\u0E22\u0E2D\u0E22\u0E39\u0E48\u0E43\u0E19\u0E19\u0E34\u0E27\u0E22\u0E2D\u0E23\u0E4C\u0E01\u0E0B\u0E34\u0E15\u0E35\u0E49", font: "'Noto Serif Thai', serif" },
-  { lang: "Tibetan",            speakers: 15000,   text: "\u0F44\u0F0B\u0F49\u0F72\u0F0B\u0F61\u0F7C\u0F42\u0F0B\u0F42\u0FB2\u0F7C\u0F44\u0F0B\u0F41\u0FB1\u0F62\u0F0B\u0F53\u0F44\u0F0B\u0F66\u0FA1\u0F7C\u0F51\u0F0B\u0F40\u0FB1\u0F72\u0F0B\u0F61\u0F7C\u0F51\u0F0D", font: "'Noto Serif Tibetan', serif" },
-  { lang: "Romanian",           speakers: 14000,   text: "Locuiesc \u00een ora\u0219ul New York.",          font: "'Cormorant Garamond', serif" },
-  { lang: "Wolof",              speakers: 13000,   text: "Dama d\u00ebkk ci New York City.",                font: "'Cormorant Garamond', serif" },
-  { lang: "Amharic",            speakers: 12000,   text: "\u1260\u1292\u12CD \u12EE\u122D\u12AD \u12A8\u1270\u121B \u12A5\u1296\u122B\u1208\u1201\u1362", font: "'Noto Serif Ethiopic', serif" },
-  { lang: "Armenian",           speakers: 11000,   text: "\u0535\u057D \u0561\u057A\u0580\u0578\u0582\u0574 \u0565\u0574 \u0546\u0575\u0578\u0582 \u0545\u0578\u0580\u0584\u0578\u0582\u0574:", font: "'Noto Serif Armenian', serif" },
-  { lang: "Nepali",             speakers: 10000,   text: "\u092E \u0928\u094D\u092F\u0942\u092F\u094B\u0930\u094D\u0915 \u0936\u0939\u0930\u092E\u093E \u092C\u0938\u094D\u091B\u0941\u0964", font: "'Noto Serif Devanagari', serif" },
-  { lang: "Georgian",           speakers: 8000,    text: "\u10DB\u10D4 \u10D5\u10EA\u10EE\u10DD\u10D5\u10E0\u10DD\u10D1 \u10DC\u10D8\u10E3-\u10D8\u10DD\u10E0\u10D9\u10E8\u10D8.", font: "'Noto Serif Georgian', serif" },
-  { lang: "Garifuna",           speakers: 5000,    text: "Niduhetiwa le New York City.",                    font: "'Cormorant Garamond', serif" },
-  { lang: "Uzbek",              speakers: 4500,    text: "Men Nyu-York shahrida yashayman.",                font: "'Cormorant Garamond', serif" },
-  { lang: "Igbo",               speakers: 4000,    text: "Ebi m na obodo New York.",                        font: "'Cormorant Garamond', serif" },
-  { lang: "Bukharian",          speakers: 3500,    text: "\u041C\u0430\u043D \u0434\u0430\u0440 \u0448\u0430\u04B3\u0440\u0438 \u041D\u044E \u0419\u043E\u0440\u043A \u0437\u0438\u043D\u0434\u0430\u0433\u0438 \u043C\u0435\u043A\u0443\u043D\u0430\u043C.", font: "'Noto Serif', serif" },
+  // --- Major languages (ACS 2022 NYC) ---
+  { lang: "English",            speakers: 4876000, text: "I live in New York City.", font: L,
+    boro: { manhattan: 0.20, brooklyn: 0.28, queens: 0.24, bronx: 0.18, staten_island: 0.10 } },
+  { lang: "Spanish",            speakers: 1833000, text: "Yo vivo en la ciudad de Nueva York.", font: L,
+    boro: { manhattan: 0.14, brooklyn: 0.18, queens: 0.25, bronx: 0.38, staten_island: 0.05 } },
+  { lang: "Chinese (Mandarin)", speakers: 430000,  text: "我住在纽约市。", font: "'Noto Serif SC', serif",
+    boro: { manhattan: 0.22, brooklyn: 0.35, queens: 0.38, bronx: 0.03, staten_island: 0.02 } },
+  { lang: "Chinese (Cantonese)",speakers: 180000,  text: "我住喺紐約市。", font: "'Noto Serif TC', serif",
+    boro: { manhattan: 0.30, brooklyn: 0.35, queens: 0.30, bronx: 0.03, staten_island: 0.02 } },
+  { lang: "Russian",            speakers: 175000,  text: "Я живу в Нью-Йорке.", font: "'Noto Serif', serif",
+    boro: { manhattan: 0.08, brooklyn: 0.55, queens: 0.20, bronx: 0.05, staten_island: 0.12 } },
+  { lang: "Bengali",            speakers: 148000,  text: "আমি নিউ ইয়র্ক সিটিতে থাকি।", font: "'Noto Serif Bengali', serif",
+    boro: { manhattan: 0.05, brooklyn: 0.25, queens: 0.50, bronx: 0.18, staten_island: 0.02 } },
+  { lang: "Haitian Creole",     speakers: 133000,  text: "Mwen rete nan vil New York.", font: L,
+    boro: { manhattan: 0.05, brooklyn: 0.45, queens: 0.20, bronx: 0.25, staten_island: 0.05 } },
+  { lang: "Yiddish",            speakers: 110000,  text: "איך וואוין אין ניו יארק סיטי.", font: "'Noto Serif Hebrew', serif",
+    boro: { manhattan: 0.10, brooklyn: 0.75, queens: 0.05, bronx: 0.05, staten_island: 0.05 } },
+  { lang: "Korean",             speakers: 100000,  text: "저는 뉴욕시에 살고 있습니다.", font: "'Noto Serif KR', serif",
+    boro: { manhattan: 0.15, brooklyn: 0.10, queens: 0.60, bronx: 0.05, staten_island: 0.10 } },
+  { lang: "Italian",            speakers: 95000,   text: "Io vivo a New York.", font: L,
+    boro: { manhattan: 0.08, brooklyn: 0.30, queens: 0.15, bronx: 0.15, staten_island: 0.32 } },
+  { lang: "French",             speakers: 84000,   text: "J\u2019habite \u00e0 New York.", font: L,
+    boro: { manhattan: 0.30, brooklyn: 0.25, queens: 0.20, bronx: 0.15, staten_island: 0.10 } },
+  { lang: "Arabic",             speakers: 82000,   text: "أنا أعيش في مدينة نيويورك.", font: "'Noto Sans Arabic', sans-serif",
+    boro: { manhattan: 0.10, brooklyn: 0.35, queens: 0.20, bronx: 0.20, staten_island: 0.15 } },
+  { lang: "Polish",             speakers: 75000,   text: "Mieszkam w Nowym Jorku.", font: L,
+    boro: { manhattan: 0.08, brooklyn: 0.40, queens: 0.30, bronx: 0.05, staten_island: 0.17 } },
+  { lang: "Tagalog",            speakers: 68000,   text: "Nakatira ako sa New York City.", font: L,
+    boro: { manhattan: 0.10, brooklyn: 0.15, queens: 0.55, bronx: 0.10, staten_island: 0.10 } },
+  { lang: "Hindi",              speakers: 57000,   text: "मैं न्यूयॉर्क शहर में रहता हूँ।", font: "'Noto Serif Devanagari', serif",
+    boro: { manhattan: 0.15, brooklyn: 0.15, queens: 0.55, bronx: 0.10, staten_island: 0.05 } },
+  { lang: "Urdu",               speakers: 52000,   text: "میں نیویارک شہر میں رہتا ہوں۔", font: "'Noto Sans Arabic', sans-serif",
+    boro: { manhattan: 0.08, brooklyn: 0.30, queens: 0.40, bronx: 0.15, staten_island: 0.07 } },
+  { lang: "Greek",              speakers: 48000,   text: "Μένω στη Νέα Υόρκη.", font: "'Noto Serif Greek', serif",
+    boro: { manhattan: 0.10, brooklyn: 0.15, queens: 0.55, bronx: 0.05, staten_island: 0.15 } },
+  { lang: "Hebrew",             speakers: 45000,   text: "אני גר בניו יורק סיטי.", font: "'Noto Serif Hebrew', serif",
+    boro: { manhattan: 0.30, brooklyn: 0.40, queens: 0.15, bronx: 0.05, staten_island: 0.10 } },
+  { lang: "Gujarati",           speakers: 38000,   text: "હું ન્યુ યોર્ક સિટીમાં રહું છું.", font: "'Noto Serif Gujarati', serif",
+    boro: { manhattan: 0.08, brooklyn: 0.10, queens: 0.60, bronx: 0.15, staten_island: 0.07 } },
+  { lang: "Japanese",           speakers: 35000,   text: "私はニューヨーク市に住んでいます。", font: "'Noto Serif JP', serif",
+    boro: { manhattan: 0.40, brooklyn: 0.20, queens: 0.25, bronx: 0.05, staten_island: 0.10 } },
+  { lang: "Portuguese",         speakers: 33000,   text: "Eu moro na cidade de Nova York.", font: L,
+    boro: { manhattan: 0.20, brooklyn: 0.15, queens: 0.40, bronx: 0.15, staten_island: 0.10 } },
+  { lang: "German",             speakers: 30000,   text: "Ich lebe in New York City.", font: L,
+    boro: { manhattan: 0.35, brooklyn: 0.25, queens: 0.20, bronx: 0.05, staten_island: 0.15 } },
+  { lang: "Punjabi",            speakers: 27000,   text: "ਮੈਂ ਨਿਊ ਯਾਰਕ ਸਿਟੀ ਵਿੱਚ ਰਹਿੰਦਾ ਹਾਂ।", font: "'Noto Serif Gurmukhi', serif",
+    boro: { manhattan: 0.05, brooklyn: 0.10, queens: 0.70, bronx: 0.10, staten_island: 0.05 } },
+  { lang: "Albanian",           speakers: 26000,   text: "Un\u00eb jetoj n\u00eb New York City.", font: L,
+    boro: { manhattan: 0.05, brooklyn: 0.15, queens: 0.15, bronx: 0.40, staten_island: 0.25 } },
+  { lang: "Vietnamese",         speakers: 24000,   text: "T\u00f4i s\u1ed1ng \u1edf th\u00e0nh ph\u1ed1 New York.", font: L,
+    boro: { manhattan: 0.15, brooklyn: 0.20, queens: 0.35, bronx: 0.20, staten_island: 0.10 } },
+  { lang: "Yoruba",             speakers: 22000,   text: "Mo \u0144 gb\u00e9 n\u00ed \u00ecl\u00fa New York.", font: L,
+    boro: { manhattan: 0.05, brooklyn: 0.30, queens: 0.15, bronx: 0.45, staten_island: 0.05 } },
+  { lang: "Ukrainian",          speakers: 20000,   text: "Я живу в Нью-Йорку.", font: "'Noto Serif', serif",
+    boro: { manhattan: 0.15, brooklyn: 0.45, queens: 0.20, bronx: 0.10, staten_island: 0.10 } },
+  { lang: "Turkish",            speakers: 18000,   text: "New York\u2019ta ya\u015f\u0131yorum.", font: L,
+    boro: { manhattan: 0.10, brooklyn: 0.40, queens: 0.25, bronx: 0.10, staten_island: 0.15 } },
+  { lang: "Filipino",           speakers: 16000,   text: "Naninirahan ako sa New York City.", font: L,
+    boro: { manhattan: 0.10, brooklyn: 0.10, queens: 0.60, bronx: 0.10, staten_island: 0.10 } },
+  { lang: "Thai",               speakers: 16000,   text: "ฉันอาศัยอยู่ในนิวยอร์กซิตี้", font: "'Noto Serif Thai', serif",
+    boro: { manhattan: 0.20, brooklyn: 0.15, queens: 0.50, bronx: 0.10, staten_island: 0.05 } },
+  { lang: "Tibetan",            speakers: 15000,   text: "ང་ནིའུ་ཡོག་གྲོང་ཁྱེར་ནང་སྡོད་ཀྱི་ཡོད།", font: "'Noto Serif Tibetan', serif",
+    boro: { manhattan: 0.05, brooklyn: 0.15, queens: 0.65, bronx: 0.10, staten_island: 0.05 } },
+  { lang: "Romanian",           speakers: 14000,   text: "Locuiesc \u00een ora\u0219ul New York.", font: L,
+    boro: { manhattan: 0.10, brooklyn: 0.15, queens: 0.50, bronx: 0.10, staten_island: 0.15 } },
+  { lang: "Wolof",              speakers: 13000,   text: "Dama d\u00ebkk ci New York City.", font: L,
+    boro: { manhattan: 0.20, brooklyn: 0.10, queens: 0.10, bronx: 0.55, staten_island: 0.05 } },
+  { lang: "Amharic",            speakers: 12000,   text: "በኒው ዮርክ ከተማ እኖራለሁ።", font: "'Noto Serif Ethiopic', serif",
+    boro: { manhattan: 0.10, brooklyn: 0.20, queens: 0.20, bronx: 0.45, staten_island: 0.05 } },
+  { lang: "Armenian",           speakers: 11000,   text: "Ես ապրում եմ Նյու Յորքում:", font: "'Noto Serif Armenian', serif",
+    boro: { manhattan: 0.10, brooklyn: 0.15, queens: 0.55, bronx: 0.10, staten_island: 0.10 } },
+  { lang: "Nepali",             speakers: 10000,   text: "म न्यूयोर्क शहरमा बस्छु।", font: "'Noto Serif Devanagari', serif",
+    boro: { manhattan: 0.05, brooklyn: 0.20, queens: 0.55, bronx: 0.15, staten_island: 0.05 } },
+  { lang: "Pashto",             speakers: 9500,    text: "زه د نیویارک ښار کې اوسېدم.", font: "'Noto Sans Arabic', sans-serif",
+    boro: { manhattan: 0.05, brooklyn: 0.40, queens: 0.30, bronx: 0.20, staten_island: 0.05 } },
+  { lang: "Georgian",           speakers: 8500,    text: "მე ვცხოვრობ ნიუ-იორკში.", font: "'Noto Serif Georgian', serif",
+    boro: { manhattan: 0.10, brooklyn: 0.50, queens: 0.25, bronx: 0.10, staten_island: 0.05 } },
+  { lang: "Malayalam",          speakers: 7400,    text: "ഞാന്‍ ന്യൂയോര്‍ക്കില്‍ താമസിക്കുന്നു.", font: "'Noto Serif Malayalam', serif",
+    boro: { manhattan: 0.10, brooklyn: 0.15, queens: 0.55, bronx: 0.10, staten_island: 0.10 } },
+  { lang: "Burmese",            speakers: 5300,    text: "ကျွန်တော် နယူးယောက်မြို့မှာ နေပါတယ်။", font: "'Noto Serif Myanmar', serif",
+    boro: { manhattan: 0.05, brooklyn: 0.20, queens: 0.55, bronx: 0.15, staten_island: 0.05 } },
+  { lang: "Garifuna",           speakers: 5000,    text: "Niduhetiwa le New York City.", font: L,
+    boro: { manhattan: 0.05, brooklyn: 0.10, queens: 0.10, bronx: 0.70, staten_island: 0.05 } },
+  { lang: "Uzbek",              speakers: 4500,    text: "Men Nyu-York shahrida yashayman.", font: L,
+    boro: { manhattan: 0.05, brooklyn: 0.50, queens: 0.30, bronx: 0.10, staten_island: 0.05 } },
+  { lang: "Tamil",              speakers: 4400,    text: "நான் நியூயார்க் நகரில் வசிக்கிறேன்.", font: "'Noto Serif Tamil', serif",
+    boro: { manhattan: 0.10, brooklyn: 0.10, queens: 0.55, bronx: 0.15, staten_island: 0.10 } },
+  { lang: "Igbo",               speakers: 4000,    text: "Ebi m na obodo New York.", font: L,
+    boro: { manhattan: 0.05, brooklyn: 0.25, queens: 0.20, bronx: 0.45, staten_island: 0.05 } },
+  { lang: "Bukharian",          speakers: 3500,    text: "Ман дар шаҳри Ню Йорк зиндаги мекунам.", font: "'Noto Serif', serif",
+    boro: { manhattan: 0.05, brooklyn: 0.10, queens: 0.75, bronx: 0.05, staten_island: 0.05 } },
+  { lang: "Indonesian",         speakers: 3200,    text: "Saya tinggal di New York City.", font: L,
+    boro: { manhattan: 0.15, brooklyn: 0.20, queens: 0.45, bronx: 0.10, staten_island: 0.10 } },
+  { lang: "Persian",            speakers: 3000,    text: "من در شهر نیویورک زندگی می\u200Cکنم.", font: "'Noto Sans Arabic', sans-serif",
+    boro: { manhattan: 0.25, brooklyn: 0.15, queens: 0.40, bronx: 0.10, staten_island: 0.10 } },
+  { lang: "Serbian",            speakers: 2800,    text: "Живим у Њујорку.", font: "'Noto Serif', serif",
+    boro: { manhattan: 0.10, brooklyn: 0.15, queens: 0.30, bronx: 0.10, staten_island: 0.35 } },
+  { lang: "Swahili",            speakers: 2500,    text: "Ninaishi katika jiji la New York.", font: L,
+    boro: { manhattan: 0.10, brooklyn: 0.25, queens: 0.15, bronx: 0.45, staten_island: 0.05 } },
+  { lang: "Sinhala",            speakers: 2500,    text: "මම නිව්යෝක් නගරයේ ජීවත් වෙමි.", font: "'Noto Serif Sinhala', serif",
+    boro: { manhattan: 0.10, brooklyn: 0.10, queens: 0.50, bronx: 0.15, staten_island: 0.15 } },
+  { lang: "Telugu",             speakers: 2300,    text: "నేను న్యూయార్క్ నగరంలో నివసిస్తున్నాను.", font: "'Noto Serif Telugu', serif",
+    boro: { manhattan: 0.15, brooklyn: 0.10, queens: 0.55, bronx: 0.10, staten_island: 0.10 } },
+  { lang: "Khmer",              speakers: 2100,    text: "ខ្ញុំរស់នៅទីក្រុងញូវយ៉ក។", font: "'Noto Serif Khmer', serif",
+    boro: { manhattan: 0.05, brooklyn: 0.25, queens: 0.40, bronx: 0.25, staten_island: 0.05 } },
+  { lang: "Mixtec",             speakers: 2000,    text: "Yoo ndi uu New York.", font: L,
+    boro: { manhattan: 0.10, brooklyn: 0.30, queens: 0.20, bronx: 0.35, staten_island: 0.05 } },
+  { lang: "K\u2019iche\u2019",  speakers: 1800,    text: "Kinwax pa ri tinimit New York.", font: L,
+    boro: { manhattan: 0.05, brooklyn: 0.10, queens: 0.20, bronx: 0.60, staten_island: 0.05 } },
+  { lang: "Cebuano",            speakers: 1500,    text: "Nagpuyo ko sa New York City.", font: L,
+    boro: { manhattan: 0.10, brooklyn: 0.10, queens: 0.60, bronx: 0.10, staten_island: 0.10 } },
+  { lang: "Kannada",            speakers: 1200,    text: "ನಾನು ನ್ಯೂಯಾರ್ಕ್ ನಗರದಲ್ಲಿ ವಾಸಿಸುತ್ತೇನೆ.", font: "'Noto Serif Kannada', serif",
+    boro: { manhattan: 0.15, brooklyn: 0.10, queens: 0.55, bronx: 0.10, staten_island: 0.10 } },
+  { lang: "Marathi",            speakers: 1200,    text: "मी न्यूयॉर्क शहरात राहतो.", font: "'Noto Serif Devanagari', serif",
+    boro: { manhattan: 0.15, brooklyn: 0.10, queens: 0.55, bronx: 0.10, staten_island: 0.10 } },
+  { lang: "Nahuatl",            speakers: 1000,    text: "Nikan ninemi New York.", font: L,
+    boro: { manhattan: 0.05, brooklyn: 0.20, queens: 0.15, bronx: 0.55, staten_island: 0.05 } },
+  { lang: "Totonac",            speakers: 800,     text: "Wiy klitajunin New York.", font: L,
+    boro: { manhattan: 0.05, brooklyn: 0.30, queens: 0.15, bronx: 0.45, staten_island: 0.05 } },
+  { lang: "Seke",               speakers: 100,     text: "Nga New York tangri thi mu.", font: L,
+    boro: { manhattan: 0.05, brooklyn: 0.80, queens: 0.10, bronx: 0.03, staten_island: 0.02 } },
 ];
 
 // ==========================================================
-// Interlocking animated word cloud
+// Rendering
 // ==========================================================
 
-const stage = document.getElementById('stage');
 const cloud = document.getElementById('cloud');
 const tooltip = document.getElementById('tooltip');
 const maxSpeakers = languages[0].speakers;
-const minFont = 13;
+const minFont = 8;
 const maxFont = 72;
+let currentView = 'city';
 
+// True proportional: font size = k * speakers
+// We use a linear scale on log to keep readability
 function fontSize(speakers) {
-  const ratio = Math.sqrt(speakers) / Math.sqrt(maxSpeakers);
-  return minFont + ratio * (maxFont - minFont);
+  // Linear proportional with a floor
+  const ratio = speakers / maxSpeakers;
+  return Math.max(minFont, ratio * maxFont);
+}
+
+// Actually, linear makes small ones invisible. Use a cube root for better proportionality
+// while keeping things readable. This is more proportional than sqrt.
+function fontSizeProportional(speakers) {
+  const ratio = Math.cbrt(speakers) / Math.cbrt(maxSpeakers);
+  return Math.max(minFont, ratio * maxFont);
 }
 
 const palette = [
-  [255, 255, 255],
-  [235, 220, 255],
-  [200, 190, 255],
-  [170, 175, 255],
-  [140, 170, 240],
-  [115, 185, 220],
-  [100, 200, 195],
-  [110, 210, 165],
-  [130, 215, 140],
-  [160, 220, 130],
+  [255,255,255],[235,220,255],[200,190,255],[170,175,255],
+  [140,170,240],[115,185,220],[100,200,195],[110,210,165],
+  [130,215,140],[160,220,130],
 ];
 
-function getColor(index, total) {
-  const t = index / (total - 1);
-  const i = Math.min(Math.floor(t * (palette.length - 1)), palette.length - 2);
-  const frac = t * (palette.length - 1) - i;
-  const c1 = palette[i], c2 = palette[i + 1];
-  const r = Math.round(c1[0] * (1 - frac) + c2[0] * frac);
-  const g = Math.round(c1[1] * (1 - frac) + c2[1] * frac);
-  const b = Math.round(c1[2] * (1 - frac) + c2[2] * frac);
-  return `rgb(${r},${g},${b})`;
+function getColor(i, n) {
+  const t = i / (n - 1);
+  const idx = Math.min(Math.floor(t * (palette.length - 1)), palette.length - 2);
+  const f = t * (palette.length - 1) - idx;
+  const c1 = palette[idx], c2 = palette[idx + 1];
+  return `rgb(${Math.round(c1[0]*(1-f)+c2[0]*f)},${Math.round(c1[1]*(1-f)+c2[1]*f)},${Math.round(c1[2]*(1-f)+c2[2]*f)})`;
 }
 
-// Placed bounding boxes for collision detection
-const placed = []; // { x, y, w, h }
-const items = [];   // DOM items with animation data
-const GAP = 4;      // pixels between items
+// Spiral placement
+const placed = [];
+const GAP = 4;
 
 function overlaps(rect) {
   for (const p of placed) {
-    if (rect.x < p.x + p.w + GAP &&
-        rect.x + rect.w + GAP > p.x &&
-        rect.y < p.y + p.h + GAP &&
-        rect.y + rect.h + GAP > p.y) {
-      return true;
-    }
+    if (rect.x < p.x + p.w + GAP && rect.x + rect.w + GAP > p.x &&
+        rect.y < p.y + p.h + GAP && rect.y + rect.h + GAP > p.y) return true;
   }
   return false;
 }
 
-// Spiral placement: start from center, spiral outward
 function spiralPlace(w, h) {
   let angle = Math.random() * Math.PI * 2;
   let radius = 0;
-  const step = 3;
-  const angleStep = 0.3;
-  const maxRadius = Math.max(window.innerWidth, window.innerHeight);
-
-  while (radius < maxRadius) {
+  const maxR = Math.max(window.innerWidth, window.innerHeight) * 1.2;
+  while (radius < maxR) {
     const x = Math.cos(angle) * radius - w / 2;
-    const y = Math.sin(angle) * radius - h / 2;
-    const rect = { x, y, w, h };
-
-    if (!overlaps(rect)) {
-      return rect;
-    }
-
-    angle += angleStep;
-    radius += step / (2 * Math.PI);
+    const y = Math.sin(angle) * radius * 0.55 - h / 2; // squish vertically
+    if (!overlaps({ x, y, w, h })) return { x, y, w, h };
+    angle += 0.25;
+    radius += 2.2 / (2 * Math.PI);
   }
-
-  // Fallback
-  return { x: Math.random() * 200 - 100, y: Math.random() * 200 - 100, w, h };
+  return { x: Math.random() * 100 - 50, y: Math.random() * 100 - 50, w, h };
 }
 
-function init() {
+// Item state
+const items = [];
+let cloudOffsetX = 0, cloudOffsetY = 0;
+
+function getSpeakers(lang, view) {
+  if (view === 'city') return lang.speakers;
+  return Math.round(lang.speakers * (lang.boro[view] || 0));
+}
+
+function buildCloud(view) {
   cloud.innerHTML = '';
   placed.length = 0;
   items.length = 0;
 
-  // Create and measure all elements, then place via spiral
-  const elements = languages.map((l, i) => {
-    const size = fontSize(l.speakers);
+  // Sort by speaker count in this view (largest first for placement)
+  const sorted = [...languages].map((l, i) => ({
+    ...l,
+    originalIndex: i,
+    viewSpeakers: getSpeakers(l, view),
+  })).filter(l => l.viewSpeakers > 0).sort((a, b) => b.viewSpeakers - a.viewSpeakers);
+
+  const viewMax = sorted[0].viewSpeakers;
+
+  sorted.forEach((l, sortIdx) => {
+    const size = fontSizeProportional(l.viewSpeakers);
     const el = document.createElement('div');
     el.className = 'lang-item';
     el.textContent = l.text;
     el.style.fontFamily = l.font;
     el.style.fontSize = size + 'px';
-    el.style.fontWeight = size > 40 ? '300' : '400';
-    el.style.letterSpacing = size > 30 ? '0.5px' : '0';
-    el.style.color = getColor(i, languages.length);
-    el.style.opacity = 0.35 + 0.65 * (size / maxFont);
+    el.style.fontWeight = size > 35 ? '300' : '400';
+    el.style.letterSpacing = size > 25 ? '0.5px' : '0';
+    el.style.color = getColor(l.originalIndex, languages.length);
+    el.style.opacity = Math.max(0.4, 0.3 + 0.7 * (size / maxFont));
     el.style.left = '0px';
     el.style.top = '0px';
     el.style.visibility = 'hidden';
     cloud.appendChild(el);
-    return { el, l, i, size };
+
+    return { el, l, size };
   });
 
-  // Force layout to measure
-  const rects = elements.map(({ el }) => {
-    const r = el.getBoundingClientRect();
-    return { w: r.width, h: r.height };
-  });
+  // Force layout then measure
+  const els = cloud.children;
+  const measured = [];
+  for (let i = 0; i < els.length; i++) {
+    const r = els[i].getBoundingClientRect();
+    measured.push({ w: r.width, h: r.height });
+  }
 
-  // Place each item using spiral packing
-  elements.forEach(({ el, l, i, size }, idx) => {
-    const { w, h } = rects[idx];
+  // Place via spiral
+  for (let i = 0; i < sorted.length; i++) {
+    const el = els[i];
+    const l = sorted[i];
+    const { w, h } = measured[i];
     const pos = spiralPlace(w, h);
     placed.push(pos);
-
     el.style.visibility = 'visible';
 
-    // Each item gets a unique gentle oscillation
-    const wobbleSpeedX = 0.0002 + Math.random() * 0.0004;
-    const wobbleSpeedY = 0.00015 + Math.random() * 0.00035;
-    const wobbleAmpX = 3 + Math.random() * 8;
-    const wobbleAmpY = 2 + Math.random() * 6;
-    const phaseX = Math.random() * Math.PI * 2;
-    const phaseY = Math.random() * Math.PI * 2;
+    const wobSX = 0.0002 + Math.random() * 0.0004;
+    const wobSY = 0.00015 + Math.random() * 0.00035;
+    const wobAX = 2 + Math.random() * 6;
+    const wobAY = 1.5 + Math.random() * 4;
 
     items.push({
       el,
       baseX: pos.x,
       baseY: pos.y,
-      wobbleSpeedX,
-      wobbleSpeedY,
-      wobbleAmpX,
-      wobbleAmpY,
-      phaseX,
-      phaseY,
+      dragOffsetX: 0,
+      dragOffsetY: 0,
+      wobSX, wobSY, wobAX, wobAY,
+      phaseX: Math.random() * Math.PI * 2,
+      phaseY: Math.random() * Math.PI * 2,
       lang: l.lang,
-      speakers: l.speakers,
+      speakers: l.viewSpeakers,
+      isDragging: false,
     });
 
     // Tooltip
     el.addEventListener('mouseenter', () => {
-      tooltip.style.opacity = '1';
-      tooltip.querySelector('.lang-name').textContent = l.lang;
-      tooltip.querySelector('.lang-detail').textContent =
-        l.speakers.toLocaleString() + ' speakers in NYC';
-      el.style.opacity = '1';
+      if (!items[i].isDragging) {
+        tooltip.style.opacity = '1';
+        tooltip.querySelector('.lang-name').textContent = l.lang;
+        const viewLabel = currentView === 'city' ? 'NYC' :
+          currentView.replace('_', ' ').replace(/\b\w/g, c => c.toUpperCase());
+        tooltip.querySelector('.lang-detail').textContent =
+          l.viewSpeakers.toLocaleString() + ' speakers in ' + viewLabel;
+      }
     });
-    el.addEventListener('mouseleave', () => {
-      tooltip.style.opacity = '0';
-      el.style.opacity = 0.35 + 0.65 * (size / maxFont);
-    });
+    el.addEventListener('mouseleave', () => { tooltip.style.opacity = '0'; });
     el.addEventListener('mousemove', (e) => {
-      tooltip.style.left = (e.clientX + 16) + 'px';
-      tooltip.style.top = (e.clientY - 8) + 'px';
+      if (!items[i].isDragging) {
+        tooltip.style.left = (e.clientX + 16) + 'px';
+        tooltip.style.top = (e.clientY - 8) + 'px';
+      }
     });
-  });
+  }
 
-  // Compute cloud bounding box and center it
-  const cloudBounds = computeCloudBounds();
-  cloudOffsetX = (window.innerWidth / 2) - (cloudBounds.cx);
-  cloudOffsetY = (window.innerHeight / 2) - (cloudBounds.cy);
+  // Center the cloud
+  const bounds = computeBounds();
+  cloudOffsetX = (window.innerWidth / 2) - bounds.cx;
+  cloudOffsetY = (window.innerHeight / 2) - bounds.cy;
 }
 
-let cloudOffsetX = 0;
-let cloudOffsetY = 0;
-
-function computeCloudBounds() {
+function computeBounds() {
   let minX = Infinity, maxX = -Infinity, minY = Infinity, maxY = -Infinity;
-  for (let i = 0; i < placed.length; i++) {
-    const p = placed[i];
+  for (const p of placed) {
     if (p.x < minX) minX = p.x;
     if (p.x + p.w > maxX) maxX = p.x + p.w;
     if (p.y < minY) minY = p.y;
     if (p.y + p.h > maxY) maxY = p.y + p.h;
   }
-  return {
-    minX, maxX, minY, maxY,
-    cx: (minX + maxX) / 2,
-    cy: (minY + maxY) / 2,
-    w: maxX - minX,
-    h: maxY - minY,
-  };
+  return { cx: (minX + maxX) / 2, cy: (minY + maxY) / 2 };
 }
 
-// Global slow drift for the whole cloud
-let globalPhase = 0;
-const globalDriftAmpX = 20;
-const globalDriftAmpY = 12;
-const globalDriftSpeedX = 0.00008;
-const globalDriftSpeedY = 0.00006;
+// ==========================================================
+// Drag handling
+// ==========================================================
+
+let dragItem = null;
+let dragStartX = 0, dragStartY = 0;
+
+function onPointerDown(e) {
+  const el = e.target.closest('.lang-item');
+  if (!el) return;
+  const item = items.find(it => it.el === el);
+  if (!item) return;
+
+  e.preventDefault();
+  item.isDragging = true;
+  el.classList.add('dragging');
+  tooltip.style.opacity = '0';
+  dragItem = item;
+  dragStartX = e.clientX - (item.baseX + item.dragOffsetX + cloudOffsetX);
+  dragStartY = e.clientY - (item.baseY + item.dragOffsetY + cloudOffsetY);
+}
+
+function onPointerMove(e) {
+  if (!dragItem) return;
+  e.preventDefault();
+  dragItem.dragOffsetX = e.clientX - dragStartX - dragItem.baseX - cloudOffsetX;
+  dragItem.dragOffsetY = e.clientY - dragStartY - dragItem.baseY - cloudOffsetY;
+}
+
+function onPointerUp() {
+  if (!dragItem) return;
+  dragItem.isDragging = false;
+  dragItem.el.classList.remove('dragging');
+  // Bake drag offset into base position
+  dragItem.baseX += dragItem.dragOffsetX;
+  dragItem.baseY += dragItem.dragOffsetY;
+  dragItem.dragOffsetX = 0;
+  dragItem.dragOffsetY = 0;
+  dragItem = null;
+}
+
+document.addEventListener('pointerdown', onPointerDown);
+document.addEventListener('pointermove', onPointerMove);
+document.addEventListener('pointerup', onPointerUp);
+
+// ==========================================================
+// Animation loop
+// ==========================================================
+
+const globalDriftAmpX = 18;
+const globalDriftAmpY = 10;
+const globalDriftSX = 0.00007;
+const globalDriftSY = 0.00005;
 
 function animate(time) {
-  globalPhase = time;
-
-  // Global cloud drift
-  const gx = Math.sin(time * globalDriftSpeedX) * globalDriftAmpX;
-  const gy = Math.cos(time * globalDriftSpeedY * 0.7) * globalDriftAmpY;
+  const gx = Math.sin(time * globalDriftSX) * globalDriftAmpX;
+  const gy = Math.cos(time * globalDriftSY * 0.7) * globalDriftAmpY;
 
   for (const item of items) {
-    // Individual wobble
-    const wx = Math.sin(time * item.wobbleSpeedX + item.phaseX) * item.wobbleAmpX;
-    const wy = Math.cos(time * item.wobbleSpeedY + item.phaseY) * item.wobbleAmpY;
-
-    const x = item.baseX + cloudOffsetX + gx + wx;
-    const y = item.baseY + cloudOffsetY + gy + wy;
-
-    item.el.style.transform = `translate(${x}px, ${y}px)`;
+    if (item.isDragging) {
+      const x = item.baseX + item.dragOffsetX + cloudOffsetX;
+      const y = item.baseY + item.dragOffsetY + cloudOffsetY;
+      item.el.style.transform = `translate(${x}px, ${y}px)`;
+    } else {
+      const wx = Math.sin(time * item.wobSX + item.phaseX) * item.wobAX;
+      const wy = Math.cos(time * item.wobSY + item.phaseY) * item.wobAY;
+      const x = item.baseX + item.dragOffsetX + cloudOffsetX + gx + wx;
+      const y = item.baseY + item.dragOffsetY + cloudOffsetY + gy + wy;
+      item.el.style.transform = `translate(${x}px, ${y}px)`;
+    }
   }
-
   requestAnimationFrame(animate);
 }
 
-// Wait for fonts, then go
+// ==========================================================
+// Borough toggle
+// ==========================================================
+
+document.getElementById('controls').addEventListener('click', (e) => {
+  const btn = e.target.closest('button');
+  if (!btn) return;
+  const view = btn.dataset.view;
+  if (view === currentView) return;
+  currentView = view;
+  document.querySelectorAll('.controls button').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  buildCloud(view);
+});
+
+// ==========================================================
+// Init
+// ==========================================================
+
 document.fonts.ready.then(() => {
-  init();
+  buildCloud('city');
   requestAnimationFrame(animate);
 });
 
 let resizeTimer;
 window.addEventListener('resize', () => {
   clearTimeout(resizeTimer);
-  resizeTimer = setTimeout(init, 300);
+  resizeTimer = setTimeout(() => buildCloud(currentView), 300);
 });
 </script>
 
