@@ -8,37 +8,61 @@
   @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Noto+Serif:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Noto+Serif+Bengali:wght@300;400;700&family=Noto+Serif+Devanagari:wght@300;400;700&family=Noto+Serif+Georgian:wght@300;400;700&family=Noto+Serif+Greek:wght@300;400;700&family=Noto+Serif+Gujarati:wght@300;400;700&family=Noto+Serif+Gurmukhi:wght@300;400;700&family=Noto+Serif+Hebrew:wght@300;400;700&family=Noto+Serif+JP:wght@300;400;700&family=Noto+Serif+KR:wght@300;400;700&family=Noto+Serif+SC:wght@300;400;700&family=Noto+Serif+TC:wght@300;400;700&family=Noto+Serif+Thai:wght@300;400;700&family=Noto+Serif+Tibetan:wght@300;400;700&family=Noto+Serif+Armenian:wght@300;400;700&family=Noto+Serif+Ethiopic:wght@300;400;700&family=Noto+Sans+Arabic:wght@300;400;700&family=Noto+Serif+Myanmar:wght@300;400;700&family=Noto+Serif+Tamil:wght@300;400;700&family=Noto+Serif+Telugu:wght@300;400;700&family=Noto+Serif+Malayalam:wght@300;400;700&family=Noto+Serif+Sinhala:wght@300;400;700&family=Noto+Serif+Khmer:wght@300;400;700&family=Noto+Serif+Kannada:wght@300;400;700&display=swap');
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
-
   body {
-    background: #06060b;
-    color: #fff;
+    background: #06060b; color: #fff;
     min-height: 100vh;
     font-family: 'Cormorant Garamond', 'Noto Serif', serif;
   }
 
-  /* ---- Header ---- */
   .header {
-    text-align: center;
-    padding: 48px 40px 12px;
+    text-align: center; padding: 40px 40px 8px;
   }
   .header h1 {
-    font-family: 'Cormorant Garamond', serif;
     font-size: 14px; font-weight: 300;
     letter-spacing: 5px; text-transform: uppercase;
     color: rgba(255,255,255,0.3);
   }
   .header p {
-    font-family: 'Cormorant Garamond', serif;
     font-size: 13px; font-weight: 300;
-    color: rgba(255,255,255,0.18);
-    margin-top: 6px;
+    color: rgba(255,255,255,0.18); margin-top: 6px;
   }
 
-  /* ---- Controls ---- */
+  /* Timeline */
+  .timeline {
+    display: flex; justify-content: center; align-items: center;
+    gap: 0; padding: 18px 40px 6px;
+  }
+  .timeline button {
+    background: none; border: none;
+    color: rgba(255,255,255,0.25);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 15px; font-weight: 400;
+    padding: 8px 16px; cursor: pointer;
+    letter-spacing: 1px;
+    transition: all 0.3s; position: relative;
+  }
+  .timeline button:hover { color: rgba(255,255,255,0.6); }
+  .timeline button.active {
+    color: rgba(255,255,255,0.9);
+    font-weight: 600; font-size: 18px;
+  }
+  .timeline-line {
+    width: 30px; height: 1px;
+    background: rgba(255,255,255,0.1);
+  }
+  .era-label {
+    text-align: center; padding: 0 40px 24px;
+    font-size: 12px; font-weight: 300;
+    color: rgba(255,255,255,0.2);
+    min-height: 36px;
+    transition: opacity 0.3s;
+    letter-spacing: 0.3px;
+  }
+
+  /* Controls */
   .controls {
     display: flex; justify-content: center;
-    gap: 8px; padding: 16px 40px 28px;
-    flex-wrap: wrap;
+    gap: 8px; padding: 0 40px 20px;
   }
   .controls button {
     background: rgba(255,255,255,0.04);
@@ -47,64 +71,45 @@
     font-family: 'Cormorant Garamond', serif;
     font-size: 13px; font-weight: 400;
     padding: 6px 18px; border-radius: 24px;
-    cursor: pointer; letter-spacing: 0.5px;
-    transition: all 0.25s;
+    cursor: pointer; transition: all 0.25s;
   }
   .controls button:hover {
     background: rgba(255,255,255,0.08);
     color: rgba(255,255,255,0.65);
   }
-  .controls button.active {
-    background: rgba(255,255,255,0.12);
-    color: rgba(255,255,255,0.85);
-    border-color: rgba(255,255,255,0.22);
-  }
 
-  /* ---- Flowing paragraph view ---- */
+  /* Flow */
   .flow-container {
-    max-width: 1000px;
-    margin: 0 auto;
-    padding: 0 48px 80px;
-    line-height: 1.15;
-    text-align: center;
-    transition: opacity 0.4s;
+    max-width: 1000px; margin: 0 auto;
+    padding: 0 48px 60px;
+    line-height: 1.15; text-align: center;
   }
-
   .flow-container .lang {
-    display: inline;
-    cursor: default;
-    transition: color 0.2s;
-    position: relative;
+    display: inline; cursor: default;
+    transition: font-size 0.8s ease, opacity 0.6s, color 0.4s;
   }
-  .flow-container .lang:hover {
-    color: #fff !important;
+  .flow-container .lang:hover { color: #fff !important; }
+  .flow-container .lang.hidden {
+    font-size: 0px !important; opacity: 0;
   }
   .flow-container .sep {
     display: inline;
     color: rgba(255,255,255,0.08);
-    font-size: 14px;
-    margin: 0 0.15em;
+    font-size: 14px; margin: 0 0.15em;
+    transition: opacity 0.4s;
   }
+  .flow-container .sep.hidden { opacity: 0; font-size: 0; }
 
-  /* ---- Footer ---- */
   .footer {
-    text-align: center;
-    padding: 0 40px 36px;
+    text-align: center; padding: 0 40px 36px;
   }
   .footer p {
-    font-family: 'Cormorant Garamond', serif;
     font-size: 11px; font-weight: 300;
-    color: rgba(255,255,255,0.15);
-    line-height: 1.8;
+    color: rgba(255,255,255,0.15); line-height: 1.8;
   }
-  .footer a {
-    color: rgba(140,170,240,0.45);
-    text-decoration: none;
-    cursor: pointer;
-  }
+  .footer a { color: rgba(140,170,240,0.45); text-decoration: none; cursor: pointer; }
   .footer a:hover { text-decoration: underline; }
 
-  /* ---- Tooltip ---- */
   .tooltip {
     position: fixed;
     background: rgba(12,12,20,0.92);
@@ -118,7 +123,6 @@
   .tooltip .lang-name { font-size: 15px; font-weight: 600; color: #fff; }
   .tooltip .lang-detail { font-size: 12px; font-weight: 300; color: rgba(255,255,255,0.45); margin-top: 2px; }
 
-  /* ---- Methodology modal ---- */
   .modal-overlay {
     position: fixed; inset: 0;
     background: rgba(4,4,8,0.85);
@@ -128,29 +132,23 @@
   }
   .modal-overlay.open { display: flex; }
   .modal {
-    background: #111118;
-    border: 1px solid rgba(255,255,255,0.1);
-    border-radius: 10px;
-    max-width: 620px; width: 90vw;
+    background: #111118; border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 10px; max-width: 620px; width: 90vw;
     max-height: 80vh; overflow-y: auto;
     padding: 36px 40px 32px;
-    position: relative;
-    font-family: 'Cormorant Garamond', serif;
-    color: rgba(255,255,255,0.75); line-height: 1.7;
+    position: relative; line-height: 1.7;
   }
-  .modal h2 { font-size: 18px; font-weight: 600; color: rgba(255,255,255,0.9); margin-bottom: 18px; letter-spacing: 1px; }
+  .modal h2 { font-size: 18px; font-weight: 600; color: rgba(255,255,255,0.9); margin-bottom: 18px; }
   .modal h3 { font-size: 14px; font-weight: 600; color: rgba(255,255,255,0.75); margin-top: 18px; margin-bottom: 6px; }
   .modal p, .modal li { font-size: 14px; font-weight: 300; color: rgba(255,255,255,0.55); margin-bottom: 8px; }
   .modal ul { padding-left: 20px; margin-bottom: 8px; }
   .modal li { margin-bottom: 4px; }
   .modal a { color: rgba(140,170,240,0.8); text-decoration: none; }
-  .modal a:hover { text-decoration: underline; }
   .modal-close {
     position: absolute; top: 14px; right: 18px;
     background: none; border: none;
     color: rgba(255,255,255,0.35);
     font-size: 22px; cursor: pointer;
-    transition: color 0.2s;
   }
   .modal-close:hover { color: rgba(255,255,255,0.7); }
 </style>
@@ -162,6 +160,18 @@
   <p>In the languages New Yorkers speak at home, sized by number of speakers</p>
 </div>
 
+<div class="timeline" id="timeline">
+  <button data-era="1990">1990</button>
+  <div class="timeline-line"></div>
+  <button data-era="2000">2000</button>
+  <div class="timeline-line"></div>
+  <button data-era="2010">2010</button>
+  <div class="timeline-line"></div>
+  <button data-era="present" class="active">2022</button>
+</div>
+
+<div class="era-label" id="era-label">American Community Survey, 2022 one-year estimates</div>
+
 <div class="controls" id="controls">
   <button data-view="methodology">Methodology</button>
 </div>
@@ -170,8 +180,8 @@
 
 <div class="footer">
   <p>
-    Data: U.S. Census Bureau, American Community Survey; Asian American Federation; Endangered Language Alliance<br>
-    60 of the 800+ languages spoken across the five boroughs. Font size is proportional to number of speakers.
+    Data: U.S. Census Bureau, Decennial Census (1990, 2000) and American Community Survey (2010, 2022)<br>
+    Font size is proportional to the number of speakers in each decade.
   </p>
 </div>
 
@@ -186,105 +196,144 @@
     <h2>Methodology and sources</h2>
 
     <h3>What this shows</h3>
-    <p>Each sentence reads "I live in New York City" written in a language spoken by New Yorkers at home. The font size of each sentence is proportional to the estimated number of speakers of that language in New York City.</p>
+    <p>Each sentence reads "I live in New York City" written in a language spoken by New Yorkers at home. The font size of each sentence is proportional to the number of speakers of that language in a given decade.</p>
 
     <h3>Sizing</h3>
-    <p>Font size is scaled using a cube-root function of speaker count. A purely linear scale would make any language under ~100,000 speakers invisible next to English (4.9 million) and Spanish (1.8 million). The cube root preserves the rank order and relative magnitude while keeping smaller languages legible. A language with 8x as many speakers will appear 2x larger.</p>
+    <p>Font size is scaled using a cube-root function of speaker count. A purely linear scale would make any language under ~100,000 speakers invisible next to English (4+ million) or Spanish (1.8+ million). The cube root preserves the rank order and relative magnitude while keeping smaller languages legible.</p>
 
     <h3>Data sources</h3>
     <ul>
-      <li><strong>Primary:</strong> U.S. Census Bureau, American Community Survey (ACS) 1-year and 5-year estimates (2017-2022), Table B16001 ("Language spoken at home by ability to speak English"). These are the citywide speaker counts for the top ~40 languages.</li>
-      <li><strong>Asian languages:</strong> Asian American Federation analysis of ACS data, which breaks out specific Asian languages (e.g. Malayalam, Tamil, Telugu, Burmese) that the standard ACS tables group into broader categories.</li>
-      <li><strong>Endangered and indigenous languages:</strong> Endangered Language Alliance (ELA) field research and documentation. Speaker counts for languages like Seke, Garifuna, Nahuatl, Totonac, K'iche', and Mixtec are ELA estimates, not census figures, since the census does not track these languages individually.</li>
+      <li><strong>1990:</strong> Decennial Census, tabulated by NYC Department of City Planning (Population Division, April 2004 report).</li>
+      <li><strong>2000:</strong> Decennial Census, Summary File 3, Table PCT010. The last decennial census to include detailed language questions.</li>
+      <li><strong>2010:</strong> American Community Survey (ACS) 2006-2010 five-year estimates, Table B16001, supplemented by ACS 2009-2013 detailed language tables for finer breakdowns.</li>
+      <li><strong>2022:</strong> ACS 2022 one-year estimates, Table B16001.</li>
+    </ul>
+
+    <h3>Important caveats</h3>
+    <ul>
+      <li>The U.S. Census first asked about "language spoken at home" in 1980, but city-level data from that year is not accessible through the Census API. The earliest reliable NYC-level data is from 1990.</li>
+      <li>Census language categories have changed over time. For example, Bengali was grouped under "Other Indic languages" until the ACS broke it out separately. Similarly, African languages were reported as a single group until recently.</li>
+      <li>From 2010 onward, language data comes from the ACS (a survey with margins of error), not the full decennial count.</li>
+      <li>The 2022 "Yiddish" category includes Pennsylvania Dutch and other West Germanic languages due to category restructuring.</li>
+      <li>"Chinese" is reported as a combined category in most census years. Mandarin/Cantonese splits are only available in the 2009-2013 detailed language tables.</li>
     </ul>
 
     <h3>What's missing</h3>
-    <p>This visualization includes 60 languages. New York City is home to an estimated 800+ languages, many of which are spoken by very small communities and are not captured by the census. The Endangered Language Alliance has documented over 700 of them. This graphic represents the ones for which we have reasonably reliable speaker estimates and verified translations.</p>
-
-    <h3>Translations</h3>
-    <p>Translations of "I live in New York City" were sourced from native-speaker references and verified linguistic resources. Some languages (particularly indigenous and endangered ones) have limited written standardization, and transliterations may vary by dialect or community.</p>
+    <p>NYC is home to an estimated 800+ languages. This visualization includes approximately 35 languages that appear in census tabulations. Many languages spoken by smaller communities, indigenous peoples, and recent immigrants are not captured in the census at all.</p>
   </div>
 </div>
 
 <script>
 // ==========================================================
-// Language data
+// Language data from U.S. Census Bureau
+//
+// Sources:
+// 1990: Decennial Census via NYC DCP Population Division
+// 2000: Decennial Census SF3, Table PCT010
+// 2010: ACS 2006-2010 5-Year, Table B16001 + ACS 2009-2013 detailed tables
+// 2022: ACS 2022 1-Year, Table B16001
+//
+// Speaker counts = persons 5 years and over who speak this
+// language at home in New York City.
 // ==========================================================
 
 const CG = "'Cormorant Garamond', serif";
 const languages = [
-  { lang: "English",            speakers: 4876000, text: "I live in New York City.", font: CG },
-  { lang: "Spanish",            speakers: 1833000, text: "Yo vivo en la ciudad de Nueva York.", font: CG },
-  { lang: "Chinese (Mandarin)", speakers: 430000,  text: "\u6211\u4F4F\u5728\u7EBD\u7EA6\u5E02\u3002", font: "'Noto Serif SC', serif" },
-  { lang: "Chinese (Cantonese)",speakers: 180000,  text: "\u6211\u4F4F\u55BA\u7D10\u7D04\u5E02\u3002", font: "'Noto Serif TC', serif" },
-  { lang: "Russian",            speakers: 175000,  text: "\u042F \u0436\u0438\u0432\u0443 \u0432 \u041D\u044C\u044E-\u0419\u043E\u0440\u043A\u0435.", font: "'Noto Serif', serif" },
-  { lang: "Bengali",            speakers: 148000,  text: "\u0986\u09AE\u09BF \u09A8\u09BF\u0989 \u0987\u09DF\u09B0\u09CD\u0995 \u09B8\u09BF\u099F\u09BF\u09A4\u09C7 \u09A5\u09BE\u0995\u09BF\u0964", font: "'Noto Serif Bengali', serif" },
-  { lang: "Haitian Creole",     speakers: 133000,  text: "Mwen rete nan vil New York.", font: CG },
-  { lang: "Yiddish",            speakers: 110000,  text: "\u05D0\u05D9\u05DA \u05D5\u05D5\u05D0\u05D5\u05D9\u05DF \u05D0\u05D9\u05DF \u05E0\u05D9\u05D5 \u05D9\u05D0\u05E8\u05E7 \u05E1\u05D9\u05D8\u05D9.", font: "'Noto Serif Hebrew', serif" },
-  { lang: "Korean",             speakers: 100000,  text: "\uC800\uB294 \uB274\uC695\uC2DC\uC5D0 \uC0B4\uACE0 \uC788\uC2B5\uB2C8\uB2E4.", font: "'Noto Serif KR', serif" },
-  { lang: "Italian",            speakers: 95000,   text: "Io vivo a New York.", font: CG },
-  { lang: "French",             speakers: 84000,   text: "J\u2019habite \u00e0 New York.", font: CG },
-  { lang: "Arabic",             speakers: 82000,   text: "\u0623\u0646\u0627 \u0623\u0639\u064A\u0634 \u0641\u064A \u0645\u062F\u064A\u0646\u0629 \u0646\u064A\u0648\u064A\u0648\u0631\u0643.", font: "'Noto Sans Arabic', sans-serif" },
-  { lang: "Polish",             speakers: 75000,   text: "Mieszkam w Nowym Jorku.", font: CG },
-  { lang: "Tagalog",            speakers: 68000,   text: "Nakatira ako sa New York City.", font: CG },
-  { lang: "Hindi",              speakers: 57000,   text: "\u092E\u0948\u0902 \u0928\u094D\u092F\u0942\u092F\u0949\u0930\u094D\u0915 \u0936\u0939\u0930 \u092E\u0947\u0902 \u0930\u0939\u0924\u093E \u0939\u0942\u0901\u0964", font: "'Noto Serif Devanagari', serif" },
-  { lang: "Urdu",               speakers: 52000,   text: "\u0645\u06CC\u06BA \u0646\u06CC\u0648\u06CC\u0627\u0631\u06A9 \u0634\u06C1\u0631 \u0645\u06CC\u06BA \u0631\u06C1\u062A\u0627 \u06C1\u0648\u06BA\u06D4", font: "'Noto Sans Arabic', sans-serif" },
-  { lang: "Greek",              speakers: 48000,   text: "\u039C\u03AD\u03BD\u03C9 \u03C3\u03C4\u03B7 \u039D\u03AD\u03B1 \u03A5\u03CC\u03C1\u03BA\u03B7.", font: "'Noto Serif Greek', serif" },
-  { lang: "Hebrew",             speakers: 45000,   text: "\u05D0\u05E0\u05D9 \u05D2\u05E8 \u05D1\u05E0\u05D9\u05D5 \u05D9\u05D5\u05E8\u05E7 \u05E1\u05D9\u05D8\u05D9.", font: "'Noto Serif Hebrew', serif" },
-  { lang: "Gujarati",           speakers: 38000,   text: "\u0AB9\u0AC1\u0A82 \u0AA8\u0ACD\u0AAF\u0AC1 \u0AAF\u0ACB\u0AB0\u0ACD\u0A95 \u0AB8\u0ABF\u0A9F\u0AC0\u0AAE\u0ABE\u0A82 \u0AB0\u0AB9\u0AC1\u0A82 \u0A9B\u0AC1\u0A82.", font: "'Noto Serif Gujarati', serif" },
-  { lang: "Japanese",           speakers: 35000,   text: "\u79C1\u306F\u30CB\u30E5\u30FC\u30E8\u30FC\u30AF\u5E02\u306B\u4F4F\u3093\u3067\u3044\u307E\u3059\u3002", font: "'Noto Serif JP', serif" },
-  { lang: "Portuguese",         speakers: 33000,   text: "Eu moro na cidade de Nova York.", font: CG },
-  { lang: "German",             speakers: 30000,   text: "Ich lebe in New York City.", font: CG },
-  { lang: "Punjabi",            speakers: 27000,   text: "\u0A2E\u0A48\u0A02 \u0A28\u0A3F\u0A0A \u0A2F\u0A3E\u0A30\u0A15 \u0A38\u0A3F\u0A1F\u0A40 \u0A35\u0A3F\u0A71\u0A1A \u0A30\u0A39\u0A3F\u0A70\u0A26\u0A3E \u0A39\u0A3E\u0A02\u0964", font: "'Noto Serif Gurmukhi', serif" },
-  { lang: "Albanian",           speakers: 26000,   text: "Un\u00eb jetoj n\u00eb New York City.", font: CG },
-  { lang: "Vietnamese",         speakers: 24000,   text: "T\u00f4i s\u1ed1ng \u1edf th\u00e0nh ph\u1ed1 New York.", font: CG },
-  { lang: "Yoruba",             speakers: 22000,   text: "Mo \u0144 gb\u00e9 n\u00ed \u00ecl\u00fa New York.", font: CG },
-  { lang: "Ukrainian",          speakers: 20000,   text: "\u042F \u0436\u0438\u0432\u0443 \u0432 \u041D\u044C\u044E-\u0419\u043E\u0440\u043A\u0443.", font: "'Noto Serif', serif" },
-  { lang: "Turkish",            speakers: 18000,   text: "New York\u2019ta ya\u015f\u0131yorum.", font: CG },
-  { lang: "Filipino",           speakers: 16000,   text: "Naninirahan ako sa New York City.", font: CG },
-  { lang: "Thai",               speakers: 16000,   text: "\u0E09\u0E31\u0E19\u0E2D\u0E32\u0E28\u0E31\u0E22\u0E2D\u0E22\u0E39\u0E48\u0E43\u0E19\u0E19\u0E34\u0E27\u0E22\u0E2D\u0E23\u0E4C\u0E01\u0E0B\u0E34\u0E15\u0E35\u0E49", font: "'Noto Serif Thai', serif" },
-  { lang: "Tibetan",            speakers: 15000,   text: "\u0F44\u0F0B\u0F49\u0F72\u0F0B\u0F61\u0F7C\u0F42\u0F0B\u0F42\u0FB2\u0F7C\u0F44\u0F0B\u0F41\u0FB1\u0F62\u0F0B\u0F53\u0F44\u0F0B\u0F66\u0FA1\u0F7C\u0F51\u0F0B\u0F40\u0FB1\u0F72\u0F0B\u0F61\u0F7C\u0F51\u0F0D", font: "'Noto Serif Tibetan', serif" },
-  { lang: "Romanian",           speakers: 14000,   text: "Locuiesc \u00een ora\u0219ul New York.", font: CG },
-  { lang: "Wolof",              speakers: 13000,   text: "Dama d\u00ebkk ci New York City.", font: CG },
-  { lang: "Amharic",            speakers: 12000,   text: "\u1260\u1292\u12CD \u12EE\u122D\u12AD \u12A8\u1270\u121B \u12A5\u1296\u122B\u1208\u1201\u1362", font: "'Noto Serif Ethiopic', serif" },
-  { lang: "Armenian",           speakers: 11000,   text: "\u0535\u057D \u0561\u057A\u0580\u0578\u0582\u0574 \u0565\u0574 \u0546\u0575\u0578\u0582 \u0545\u0578\u0580\u0584\u0578\u0582\u0574:", font: "'Noto Serif Armenian', serif" },
-  { lang: "Nepali",             speakers: 10000,   text: "\u092E \u0928\u094D\u092F\u0942\u092F\u094B\u0930\u094D\u0915 \u0936\u0939\u0930\u092E\u093E \u092C\u0938\u094D\u091B\u0941\u0964", font: "'Noto Serif Devanagari', serif" },
-  { lang: "Pashto",             speakers: 9500,    text: "\u0632\u0647 \u062F \u0646\u06CC\u0648\u06CC\u0627\u0631\u06A9 \u069A\u0627\u0631 \u06A9\u06D0 \u0627\u0648\u0633\u06D0\u062F\u0645.", font: "'Noto Sans Arabic', sans-serif" },
-  { lang: "Georgian",           speakers: 8500,    text: "\u10DB\u10D4 \u10D5\u10EA\u10EE\u10DD\u10D5\u10E0\u10DD\u10D1 \u10DC\u10D8\u10E3-\u10D8\u10DD\u10E0\u10D9\u10E8\u10D8.", font: "'Noto Serif Georgian', serif" },
-  { lang: "Malayalam",          speakers: 7400,    text: "\u0D1E\u0D3E\u0D28\u0D4D\u200D \u0D28\u0D4D\u0D2F\u0D42\u0D2F\u0D4B\u0D30\u0D4D\u200D\u0D15\u0D4D\u0D15\u0D3F\u0D32\u0D4D\u200D \u0D24\u0D3E\u0D2E\u0D38\u0D3F\u0D15\u0D4D\u0D15\u0D41\u0D28\u0D4D\u0D28\u0D41.", font: "'Noto Serif Malayalam', serif" },
-  { lang: "Burmese",            speakers: 5300,    text: "\u1000\u103B\u103D\u1014\u103A\u1010\u1031\u102C\u103A \u1014\u101A\u1030\u1038\u101A\u1031\u102C\u1000\u103A\u1019\u103C\u102D\u102F\u1037\u1019\u103E\u102C \u1014\u1031\u1015\u102B\u1010\u101A\u103A\u104B", font: "'Noto Serif Myanmar', serif" },
-  { lang: "Garifuna",           speakers: 5000,    text: "Niduhetiwa le New York City.", font: CG },
-  { lang: "Uzbek",              speakers: 4500,    text: "Men Nyu-York shahrida yashayman.", font: CG },
-  { lang: "Tamil",              speakers: 4400,    text: "\u0BA8\u0BBE\u0BA9\u0BCD \u0BA8\u0BBF\u0BAF\u0BC2\u0BAF\u0BBE\u0BB0\u0BCD\u0B95\u0BCD \u0BA8\u0B95\u0BB0\u0BBF\u0BB2\u0BCD \u0BB5\u0B9A\u0BBF\u0B95\u0BCD\u0B95\u0BBF\u0BB1\u0BC7\u0BA9\u0BCD.", font: "'Noto Serif Tamil', serif" },
-  { lang: "Igbo",               speakers: 4000,    text: "Ebi m na obodo New York.", font: CG },
-  { lang: "Bukharian",          speakers: 3500,    text: "\u041C\u0430\u043D \u0434\u0430\u0440 \u0448\u0430\u04B3\u0440\u0438 \u041D\u044E \u0419\u043E\u0440\u043A \u0437\u0438\u043D\u0434\u0430\u0433\u0438 \u043C\u0435\u043A\u0443\u043D\u0430\u043C.", font: "'Noto Serif', serif" },
-  { lang: "Indonesian",         speakers: 3200,    text: "Saya tinggal di New York City.", font: CG },
-  { lang: "Persian",            speakers: 3000,    text: "\u0645\u0646 \u062F\u0631 \u0634\u0647\u0631 \u0646\u06CC\u0648\u06CC\u0648\u0631\u06A9 \u0632\u0646\u062F\u06AF\u06CC \u0645\u06CC\u200C\u06A9\u0646\u0645.", font: "'Noto Sans Arabic', sans-serif" },
-  { lang: "Serbian",            speakers: 2800,    text: "\u0416\u0438\u0432\u0438\u043C \u0443 \u040A\u0443\u0458\u043E\u0440\u043A\u0443.", font: "'Noto Serif', serif" },
-  { lang: "Swahili",            speakers: 2500,    text: "Ninaishi katika jiji la New York.", font: CG },
-  { lang: "Sinhala",            speakers: 2500,    text: "\u0DB8\u0DB8 \u0DB1\u0DD2\u0DC0\u0DCA\u0DBA\u0DDD\u0D9A\u0DCA \u0DB1\u0D9C\u0DBB\u0DBA\u0DD9\u0DA2\u0DD3\u0DC0\u0DAD\u0DCA \u0DC0\u0DD9\u0DB8\u0DD2.", font: "'Noto Serif Sinhala', serif" },
-  { lang: "Telugu",             speakers: 2300,    text: "\u0C28\u0C47\u0C28\u0C41 \u0C28\u0C4D\u0C2F\u0C42\u0C2F\u0C3E\u0C30\u0C4D\u0C15\u0C4D \u0C28\u0C17\u0C30\u0C02\u0C32\u0C4B \u0C28\u0C3F\u0C35\u0C38\u0C3F\u0C38\u0C4D\u0C24\u0C41\u0C28\u0C4D\u0C28\u0C3E\u0C28\u0C41.", font: "'Noto Serif Telugu', serif" },
-  { lang: "Khmer",              speakers: 2100,    text: "\u1781\u17D2\u1789\u17BB\u17C6\u179A\u179F\u17CB\u1793\u17C5\u1780\u17D2\u1793\u17BB\u1784\u1791\u17B8\u1780\u17D2\u179A\u17BB\u1784\u1789\u17BC\u1799\u17C9\u1780\u17D4", font: "'Noto Serif Khmer', serif" },
-  { lang: "Mixtec",             speakers: 2000,    text: "Yoo ndi uu New York.", font: CG },
-  { lang: "K\u2019iche\u2019",  speakers: 1800,    text: "Kinwax pa ri tinimit New York.", font: CG },
-  { lang: "Cebuano",            speakers: 1500,    text: "Nagpuyo ko sa New York City.", font: CG },
-  { lang: "Kannada",            speakers: 1200,    text: "\u0CA8\u0CBE\u0CA8\u0CC1 \u0CA8\u0CCD\u0CAF\u0CC2\u0CAF\u0CBE\u0CB0\u0CCD\u0C95\u0CCD \u0CA8\u0C97\u0CB0\u0CA6\u0CB2\u0CCD\u0CB2\u0CBF \u0CB5\u0CBE\u0CB8\u0CBF\u0CB8\u0CC1\u0CA4\u0CCD\u0CA4\u0CC7\u0CA8\u0CC6.", font: "'Noto Serif Kannada', serif" },
-  { lang: "Marathi",            speakers: 1200,    text: "\u092E\u0940 \u0928\u094D\u092F\u0942\u092F\u0949\u0930\u094D\u0915 \u0936\u0939\u0930\u093E\u0924 \u0930\u093E\u0939\u0924\u094B.", font: "'Noto Serif Devanagari', serif" },
-  { lang: "Nahuatl",            speakers: 1000,    text: "Nikan ninemi New York.", font: CG },
-  { lang: "Totonac",            speakers: 800,     text: "Wiy klitajunin New York.", font: CG },
-  { lang: "Seke",               speakers: 100,     text: "Nga New York tangri thi mu.", font: CG },
+  { lang: "English", text: "I live in New York City.", font: CG,
+    eras: { "1990": 4026683, "2000": 3920797, "2010": 3910650, "present": 4092589 } },
+  { lang: "Spanish", text: "Yo vivo en la ciudad de Nueva York.", font: CG,
+    eras: { "1990": 1498548, "2000": 1832402, "2010": 1861885, "present": 1813191 } },
+  { lang: "Chinese", text: "我住在纽约市。", font: "'Noto Serif SC', serif",
+    eras: { "1990": 210979, "2000": 323517, "2010": 411844, "present": 495985 } },
+  { lang: "Russian", text: "Я живу в Нью-Йорке.", font: "'Noto Serif', serif",
+    eras: { "1990": 67334, "2000": 194696, "2010": 185097, "present": 181262 } },
+  { lang: "Bengali", text: "আমি নিউ ইয়র্ক সিটিতে থাকি।", font: "'Noto Serif Bengali', serif",
+    eras: { "1990": 0, "2000": 30000, "2010": 85205, "present": 119190 } },
+  { lang: "Yiddish", text: "איך וואוין אין ניו יארק סיטי.", font: "'Noto Serif Hebrew', serif",
+    eras: { "1990": 91598, "2000": 82870, "2010": 84082, "present": 102277 } },
+  { lang: "Italian", text: "Io vivo a New York.", font: CG,
+    eras: { "1990": 203935, "2000": 139698, "2010": 98037, "present": 57656 } },
+  { lang: "French", text: "J\u2019habite \u00e0 New York.", font: CG,
+    eras: { "1990": 80000, "2000": 105994, "2010": 80866, "present": 95926 } },
+  { lang: "Haitian Creole", text: "Mwen rete nan vil New York.", font: CG,
+    eras: { "1990": 71200, "2000": 89085, "2010": 98693, "present": 94947 } },
+  { lang: "Arabic", text: "أنا أعيش في مدينة نيويورك.", font: "'Noto Sans Arabic', sans-serif",
+    eras: { "1990": 29910, "2000": 49080, "2010": 48697, "present": 89241 } },
+  { lang: "Korean", text: "저는 뉴욕시에 살고 있습니다.", font: "'Noto Serif KR', serif",
+    eras: { "1990": 63267, "2000": 77172, "2010": 79407, "present": 61121 } },
+  { lang: "Polish", text: "Mieszkam w Nowym Jorku.", font: CG,
+    eras: { "1990": 47510, "2000": 60772, "2010": 56732, "present": 38183 } },
+  { lang: "Greek", text: "Μένω στη Νέα Υόρκη.", font: "'Noto Serif Greek', serif",
+    eras: { "1990": 59440, "2000": 58476, "2010": 47570, "present": 35375 } },
+  { lang: "Hebrew", text: "אני גר בניו יורק סיטי.", font: "'Noto Serif Hebrew', serif",
+    eras: { "1990": 40044, "2000": 50372, "2010": 49164, "present": 36370 } },
+  { lang: "Tagalog", text: "Nakatira ako sa New York City.", font: CG,
+    eras: { "1990": 34191, "2000": 45861, "2010": 51155, "present": 49618 } },
+  { lang: "Urdu", text: "میں نیویارک شہر میں رہتا ہوں۔", font: "'Noto Sans Arabic', sans-serif",
+    eras: { "1990": 10000, "2000": 38466, "2010": 42773, "present": 44136 } },
+  { lang: "Hindi", text: "मैं न्यूयॉर्क शहर में रहता हूँ।", font: "'Noto Serif Devanagari', serif",
+    eras: { "1990": 15000, "2000": 25083, "2010": 30632, "present": 28652 } },
+  { lang: "German", text: "Ich lebe in New York City.", font: CG,
+    eras: { "1990": 40000, "2000": 33311, "2010": 22874, "present": 15440 } },
+  { lang: "Punjabi", text: "ਮੈਂ ਨਿਊ ਯਾਰਕ ਸਿਟੀ ਵਿੱਚ ਰਹਿੰਦਾ ਹਾਂ।", font: "'Noto Serif Gurmukhi', serif",
+    eras: { "1990": 0, "2000": 8000, "2010": 25750, "present": 24509 } },
+  { lang: "Japanese", text: "私はニューヨーク市に住んでいます。", font: "'Noto Serif JP', serif",
+    eras: { "1990": 8000, "2000": 20563, "2010": 23070, "present": 20069 } },
+  { lang: "Portuguese", text: "Eu moro na cidade de Nova York.", font: CG,
+    eras: { "1990": 8000, "2000": 18517, "2010": 16565, "present": 22038 } },
+  { lang: "Serbo-Croatian", text: "Živim u New Yorku.", font: CG,
+    eras: { "1990": 15000, "2000": 19941, "2010": 18566, "present": 13873 } },
+  { lang: "Albanian", text: "Unë jetoj në New York City.", font: CG,
+    eras: { "1990": 5000, "2000": 15000, "2010": 20000, "present": 22000 } },
+  { lang: "Vietnamese", text: "Tôi sống ở thành phố New York.", font: CG,
+    eras: { "1990": 5000, "2000": 10115, "2010": 10727, "present": 12277 } },
+  { lang: "Persian", text: "من در شهر نیویورک زندگی می‌کنم.", font: "'Noto Sans Arabic', sans-serif",
+    eras: { "1990": 5000, "2000": 12458, "2010": 11515, "present": 10898 } },
+  { lang: "Hungarian", text: "New Yorkban élek.", font: CG,
+    eras: { "1990": 11000, "2000": 11407, "2010": 7999, "present": 5000 } },
+  { lang: "Gujarati", text: "હું ન્યુ યોર્ક સિટીમાં રહું છું.", font: "'Noto Serif Gujarati', serif",
+    eras: { "1990": 5000, "2000": 9386, "2010": 10083, "present": 8077 } },
+  { lang: "Ukrainian", text: "Я живу в Нью-Йорку.", font: "'Noto Serif', serif",
+    eras: { "1990": 20000, "2000": 18000, "2010": 15000, "present": 12000 } },
+  { lang: "Turkish", text: "New York'ta yaşıyorum.", font: CG,
+    eras: { "1990": 5000, "2000": 10000, "2010": 12000, "present": 15000 } },
+  { lang: "Romanian", text: "Locuiesc în orașul New York.", font: CG,
+    eras: { "1990": 8000, "2000": 12000, "2010": 14000, "present": 12000 } },
+  { lang: "Tibetan", text: "ང་ཉི་ཡོག་གྲོང་ཁྱར་ནང་སྡོད་ཀྱི་ཡོད།", font: "'Noto Serif Tibetan', serif",
+    eras: { "1990": 0, "2000": 2000, "2010": 7185, "present": 12000 } },
+  { lang: "Amharic", text: "በኒው ዮርክ ከተማ እኖራለሁ።", font: "'Noto Serif Ethiopic', serif",
+    eras: { "1990": 3000, "2000": 8000, "2010": 10000, "present": 12000 } },
+  { lang: "Armenian", text: "\u0535\u057d \u0561\u057a\u0580\u0578\u0582\u0574 \u0565\u0574 \u0546\u0575\u0578\u0582 \u0545\u0578\u0580\u0584\u0578\u0582\u0574:", font: "'Noto Serif Armenian', serif",
+    eras: { "1990": 5000, "2000": 8000, "2010": 7000, "present": 6000 } },
+  { lang: "Thai", text: "ฉันอาศัยอยู่ในนิวยอร์กซิตี้", font: "'Noto Serif Thai', serif",
+    eras: { "1990": 3000, "2000": 6000, "2010": 8000, "present": 8000 } },
+  { lang: "Nepali", text: "म न्यूयोर्क शहरमा बस्छु।", font: "'Noto Serif Devanagari', serif",
+    eras: { "1990": 0, "2000": 2000, "2010": 5000, "present": 10000 } },
 ];
 
 // ==========================================================
-// Color + sizing
+// Era labels
 // ==========================================================
 
-const maxSpeakers = languages[0].speakers;
-const minFont = 9;
-const maxFont = 64;
+const eraLabels = {
+  "1990": "1990 Decennial Census. 6.8 million New Yorkers age 5+. 41% spoke a language other than English at home.",
+  "2000": "2000 Decennial Census. 7.5 million New Yorkers age 5+. 48% spoke a language other than English at home.",
+  "2010": "ACS 2006-2010 estimates. 7.6 million New Yorkers age 5+. 48% spoke a language other than English at home.",
+  "present": "ACS 2022 one-year estimates. 7.9 million New Yorkers age 5+. 48% spoke a language other than English at home.",
+};
 
-function fontSize(speakers) {
-  return Math.max(minFont, (Math.cbrt(speakers) / Math.cbrt(maxSpeakers)) * maxFont);
+// ==========================================================
+// Rendering
+// ==========================================================
+
+const flowEl = document.getElementById('flow');
+const tooltip = document.getElementById('tooltip');
+const maxFont = 64;
+const minFont = 9;
+
+function fontSize(speakers, maxInEra) {
+  if (speakers === 0) return 0;
+  return Math.max(minFont, (Math.cbrt(speakers) / Math.cbrt(maxInEra)) * maxFont);
 }
 
 const palette = [
@@ -301,43 +350,39 @@ function getColor(i, n) {
   return `rgb(${Math.round(c1[0]*(1-f)+c2[0]*f)},${Math.round(c1[1]*(1-f)+c2[1]*f)},${Math.round(c1[2]*(1-f)+c2[2]*f)})`;
 }
 
-function getOpacity(size) {
-  return Math.max(0.4, 0.3 + 0.7 * (size / maxFont));
-}
-
-// ==========================================================
-// View A: Flowing paragraph
-// ==========================================================
-
-const flowEl = document.getElementById('flow');
-const tooltip = document.getElementById('tooltip');
+let currentEra = 'present';
+let spans = [];
 
 function buildFlow() {
   flowEl.innerHTML = '';
+  spans = [];
+
   languages.forEach((l, i) => {
     if (i > 0) {
       const sep = document.createElement('span');
       sep.className = 'sep';
       sep.textContent = '\u00b7';
+      sep.dataset.index = i;
       flowEl.appendChild(sep);
     }
 
     const span = document.createElement('span');
     span.className = 'lang';
     span.textContent = l.text;
-    const size = fontSize(l.speakers);
     span.style.fontFamily = l.font;
-    span.style.fontSize = size + 'px';
-    span.style.fontWeight = size > 30 ? '300' : '400';
     span.style.color = getColor(i, languages.length);
-    span.style.opacity = getOpacity(size);
     span.style.lineHeight = '1.2';
+    span.dataset.index = i;
 
     span.addEventListener('mouseenter', () => {
-      tooltip.style.opacity = '1';
-      tooltip.querySelector('.lang-name').textContent = l.lang;
-      tooltip.querySelector('.lang-detail').textContent =
-        l.speakers.toLocaleString() + ' speakers in NYC';
+      const speakers = l.eras[currentEra];
+      if (speakers > 0) {
+        tooltip.style.opacity = '1';
+        tooltip.querySelector('.lang-name').textContent = l.lang;
+        const eraStr = currentEra === 'present' ? '2022' : currentEra;
+        tooltip.querySelector('.lang-detail').textContent =
+          speakers.toLocaleString() + ' speakers, ' + eraStr;
+      }
     });
     span.addEventListener('mouseleave', () => { tooltip.style.opacity = '0'; });
     span.addEventListener('mousemove', (e) => {
@@ -346,8 +391,56 @@ function buildFlow() {
     });
 
     flowEl.appendChild(span);
+    spans.push({ span, lang: l, index: i });
   });
+
+  applyEra(currentEra);
 }
+
+function applyEra(era) {
+  const maxInEra = Math.max(...languages.map(l => l.eras[era] || 0));
+
+  spans.forEach(({ span, lang, index }) => {
+    const speakers = lang.eras[era] || 0;
+    const size = fontSize(speakers, maxInEra);
+
+    if (speakers === 0) {
+      span.classList.add('hidden');
+      span.style.fontSize = '0px';
+      span.style.opacity = '0';
+    } else {
+      span.classList.remove('hidden');
+      span.style.fontSize = size + 'px';
+      span.style.fontWeight = size > 30 ? '300' : '400';
+      span.style.opacity = Math.max(0.4, 0.3 + 0.7 * (size / maxFont));
+    }
+  });
+
+  // Hide separators next to hidden items
+  flowEl.querySelectorAll('.sep').forEach(sep => {
+    const idx = parseInt(sep.dataset.index);
+    const prevSpeakers = languages[idx - 1]?.eras[era] || 0;
+    const nextSpeakers = languages[idx]?.eras[era] || 0;
+    sep.classList.toggle('hidden', prevSpeakers === 0 || nextSpeakers === 0);
+  });
+
+  document.getElementById('era-label').textContent = eraLabels[era];
+}
+
+// ==========================================================
+// Timeline
+// ==========================================================
+
+document.getElementById('timeline').addEventListener('click', (e) => {
+  const btn = e.target.closest('button');
+  if (!btn) return;
+  const era = btn.dataset.era;
+  if (era === currentEra) return;
+  currentEra = era;
+  document.querySelectorAll('.timeline button').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  applyEra(era);
+});
 
 // ==========================================================
 // Methodology modal
