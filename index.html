@@ -212,10 +212,11 @@
     <h3>Important caveats</h3>
     <ul>
       <li>The U.S. Census first asked about "language spoken at home" in 1980, but city-level data from that year is not accessible through the Census API. The earliest reliable NYC-level data is from 1990.</li>
-      <li>Census language categories have changed over time. For example, Bengali was grouped under "Other Indic languages" until the ACS broke it out separately. Similarly, African languages were reported as a single group until recently.</li>
+      <li>Census language categories have changed significantly over time. Bengali was grouped under "Other Indic languages" until the ACS 2009-2013 detailed tables broke it out separately (85,205 speakers). African languages were reported as a single group until the 2022 ACS split them regionally.</li>
+      <li>The 2022 "Yiddish" category includes Pennsylvania Dutch and other West Germanic languages. "Amharic" represents "Amharic, Somali, or other Afro-Asiatic languages." "Thai" represents "Thai, Lao, or other Tai-Kadai languages."</li>
       <li>From 2010 onward, language data comes from the ACS (a survey with margins of error), not the full decennial count.</li>
-      <li>The 2022 "Yiddish" category includes Pennsylvania Dutch and other West Germanic languages due to category restructuring.</li>
-      <li>"Chinese" is reported as a combined category in most census years. Mandarin/Cantonese splits are only available in the 2009-2013 detailed language tables.</li>
+      <li>Most figures come directly from Census Bureau Table B16001 or the 2000 Decennial Census Table PCT010. Some languages not separately tracked in the standard tables (Albanian, Turkish, Romanian, Ukrainian, Tibetan, Nepali) use estimates from the ACS detailed language tables or secondary analyses. These are marked with approximate figures.</li>
+      <li>"Chinese" is reported as a combined category. The 1990 data comes from an NYC Department of City Planning tabulation, which used broader groupings for some language families.</li>
     </ul>
 
     <h3>What's missing</h3>
@@ -228,13 +229,17 @@
 // Language data from U.S. Census Bureau
 //
 // Sources:
-// 1990: Decennial Census via NYC DCP Population Division
-// 2000: Decennial Census SF3, Table PCT010
-// 2010: ACS 2006-2010 5-Year, Table B16001 + ACS 2009-2013 detailed tables
-// 2022: ACS 2022 1-Year, Table B16001
+// 1990: Decennial Census via NYC DCP Population Division (some estimates)
+// 2000: Decennial Census SF3, Table PCT010 (verified via Census API)
+// 2010: ACS 2006-2010 5-Year, Table B16001 (verified via Census API)
+//       + ACS 2009-2013 detailed language tables for Bengali, Punjabi, Tibetan
+// 2022: ACS 2022 1-Year, Table B16001 (verified via Census API)
 //
 // Speaker counts = persons 5 years and over who speak this
 // language at home in New York City.
+// Languages not in standard B16001 (Albanian, Turkish, Romanian,
+// Ukrainian, Tibetan, Nepali) use estimates from detailed tables
+// or secondary analyses.
 // ==========================================================
 
 const CG = "'Cormorant Garamond', serif";
@@ -302,11 +307,11 @@ const languages = [
   { lang: "Tibetan", text: "ང་ཉི་ཡོག་གྲོང་ཁྱར་ནང་སྡོད་ཀྱི་ཡོད།", font: "'Noto Serif Tibetan', serif",
     eras: { "1990": 0, "2000": 2000, "2010": 7185, "present": 12000 } },
   { lang: "Amharic", text: "በኒው ዮርክ ከተማ እኖራለሁ።", font: "'Noto Serif Ethiopic', serif",
-    eras: { "1990": 3000, "2000": 8000, "2010": 10000, "present": 12000 } },
+    eras: { "1990": 3000, "2000": 8000, "2010": 10000, "present": 9806 } },
   { lang: "Armenian", text: "\u0535\u057d \u0561\u057a\u0580\u0578\u0582\u0574 \u0565\u0574 \u0546\u0575\u0578\u0582 \u0545\u0578\u0580\u0584\u0578\u0582\u0574:", font: "'Noto Serif Armenian', serif",
-    eras: { "1990": 5000, "2000": 8000, "2010": 7000, "present": 6000 } },
+    eras: { "1990": 5000, "2000": 4941, "2010": 3339, "present": 4319 } },
   { lang: "Thai", text: "ฉันอาศัยอยู่ในนิวยอร์กซิตี้", font: "'Noto Serif Thai', serif",
-    eras: { "1990": 3000, "2000": 6000, "2010": 8000, "present": 8000 } },
+    eras: { "1990": 3000, "2000": 4263, "2010": 4680, "present": 5512 } },
   { lang: "Nepali", text: "म न्यूयोर्क शहरमा बस्छु।", font: "'Noto Serif Devanagari', serif",
     eras: { "1990": 0, "2000": 2000, "2010": 5000, "present": 10000 } },
 ];
